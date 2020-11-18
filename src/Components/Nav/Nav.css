@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+nav{
+  padding: 1% 0;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+header {
+  color: white;
+}
+
+li {
+  float: right;
+  padding: 16px;
+  list-style: none;
+}
+
+li a:hover {
+  background-color: grey;
+}
+
+a {
+  color: white
+}

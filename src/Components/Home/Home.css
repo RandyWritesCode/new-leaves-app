@@ -1,0 +1,29 @@
+main {
+  background-color: lightgrey;
+  font-family: "Open Sans",
+  sans-serif;
+  font-size: 20px;
+  text-align: center;
+  line-height: 1.5;
+  color:grey;
+  padding-top: 200px;  
+  background-color: #bbb;
+}
+
+section {
+  min-height: 200px;
+  padding: 30px 15px;
+}
+
+section:nth-child(even) {
+  background-color:black;
+}
+
+section > header {
+  padding: 45px 15px;
+  font-size: 40px;
+}
+
+p {
+  font-size: 25px;
+}

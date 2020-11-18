@@ -1,0 +1,11 @@
+main {
+  background-color: lightgrey;
+  font-family: "Open Sans",
+  sans-serif;
+  font-size: 20px;
+  text-align: center;
+  line-height: 1.5;
+  color:grey;
+  padding-top: 200px;  
+  background-color: #bbb;
+}
