@@ -1,13 +1,14 @@
 import React from 'react';
 import Nav from '../Nav/Nav';
-import { Route, Switch } from 'react-router-dom'
-import Login from '../Login/Login'
-import SignUp from '../SignUp/SignUp'
+import { Route, Switch } from 'react-router-dom';
+import Login from '../Login/Login';
+import SignUp from '../SignUp/SignUp';
 import Search from '../Search/Search';
 import Feed from '../Feed/Feed';
 import Home from '../Home/Home';
 import Post from '../Post/Post';
-import STORE from '../../dummyStore'
+import STORE from '../../dummyStore';
+import Error from '../AppError/AppError';
 
 
 export default class App extends React.Component {
@@ -18,27 +19,29 @@ export default class App extends React.Component {
       searchCategory: 'title',
       display: '',
 
-      store: STORE,
+      store: {
+        posts: STORE.posts
+      },
 
       postType: '',
       postTitle: '',
       postSummary: '',
 
-      posts: STORE.posts
     }
-  }
+    console.log(this.state.store.posts)
+  };
 
   handleSearchTermChange = event => {
     this.setState({
       searchTerm: event.target.value
     })
-  }
+  };
 
   handleSearchTypeChange = event => {
     this.setState({
       searchCategory: event.target.value
     })
-  }
+  };
 
   handleSearchSubmit = (event) => {
     event.preventDefault()
@@ -50,43 +53,53 @@ export default class App extends React.Component {
     this.setState({
       display: display
     })
-  }
-
-
+  };
 
   handlePostTitleChange = event => {
     let postTitle = event.target.value
     this.setState({
       postTitle: postTitle
     })
-  }
+    console.log(this.state.postTitle)
+  };
 
   handlePostSummaryChange = event => {
     let postSummary = event.target.value
     this.setState({
       postSummary: postSummary
     })
-  }
+    console.log(this.state.postSummary)
+  };
 
   handlePostTypeChange = event => {
     let postType = event.target.value
     this.setState({
       postType: postType
     })
-  }
+    console.log(this.state.postType)
+  };
 
   handlePostSubmit = (event) => {
     event.preventDefault()
-    let post = {
-      title: this.state.postTitle,
-      summary: this.state.postSummary,
-      type: this.state.postType
+    const { store: { posts }, postTitle, postSummary, postType } = this.state
+    console.log(posts)
+
+    let newPost = {
+      title: postTitle,
+      summary: postSummary,
+      type: postType
     }
-    const newPost = [...this.state.posts, post]
+
+    let updatedPost = [...posts, newPost]
+    console.log(updatedPost)
     this.setState({
-      posts: newPost
+      store: {
+        posts: updatedPost
+      }
     })
-  }
+    console.log(this.state.store.posts)
+  };
+
 
   render() {
 
@@ -94,55 +107,56 @@ export default class App extends React.Component {
       <body className="App">
         <Nav />
         <main>
-          <Switch>
-            <Route
-              exact
-              path={'/'}
-              component={Home}
-            />
-            <Route
-              path={'/Login'}
-              component={Login}
-            />
-            <Route
-              path={'/SignUP'}
-              component={SignUp}
-            />
-            <Route
-              path={'/Feed'}
-              render={() => (
-                <Feed
-                  posts={this.state.posts}
-                />
-              )}
-            />
-            <Route
-              path={'/Post'}
-              render={() => (
-                <Post
-                  handlePostTypeChange={this.handlePostTypeChange}
-                  handlePostSubmit={this.handlePostSubmit}
-                  state={this.state}
-                  handlePostTitleChange={this.handlePostTitleChange}
-                  handlePostSummaryChange={this.handlePostSummaryChange}
-                />
-              )}
-            />
-            <Route
-              path={'/Search'}
-              render={() => (
-                <Search
-                  posts={this.state.posts}
-                  handleSearchTermChange={this.handleSearchTermChange}
-                  handleSearchTypeChange={this.handleSearchTypeChange}
-                  handleSearchSubmit={this.handleSearchSubmit}
-                  display={this.state.display}
-                />
-              )}
-            />
+          <Error>
+            <Switch>
+              <Route
+                exact
+                path={'/'}
+                component={Home}
+              />
+              <Route
+                path={'/Login'}
+                component={Login}
+              />
+              <Route
+                path={'/SignUP'}
+                component={SignUp}
+              />
+              <Route
+                path={'/Feed'}
+                render={() => (
+                  <Feed
+                    posts={this.state.store.posts}
+                  />
+                )}
+              />
+              <Route
+                path={'/Post'}
+                render={() => (
+                  <Post
+                    handlePostTypeChange={this.handlePostTypeChange}
+                    handlePostSubmit={this.handlePostSubmit}
+                    state={this.state}
+                    handlePostTitleChange={this.handlePostTitleChange}
+                    handlePostSummaryChange={this.handlePostSummaryChange}
+                  />
+                )}
+              />
+              <Route
+                path={'/Search'}
+                render={() => (
+                  <Search
+                    posts={this.state.store.posts}
+                    handleSearchTermChange={this.handleSearchTermChange}
+                    handleSearchTypeChange={this.handleSearchTypeChange}
+                    handleSearchSubmit={this.handleSearchSubmit}
+                    display={this.state.display}
+                  />
+                )}
+              />
 
-          </Switch>
-
+            </Switch>
+          </ Error >
         </main>
       </body>
     );

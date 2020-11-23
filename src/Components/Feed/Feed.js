@@ -1,6 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Error from '../AppError/AppError';
 
-function Feed(props) {
+
+export default function Feed(props) {
+  console.log(props.posts)
 
   let feed = props.posts.map((post, idx) => {
 
@@ -14,17 +18,22 @@ function Feed(props) {
       <button>Edit</button>
       <button>Delete</button>
     </section>
-    )
-  })
+    );
+  });
 
   return (
-    <div>
-      <header role="banner">
-        <h1>Leaf Pile</h1>
-      </header>
-      {feed}
-    </div>
-  )
-}
+    <Error>
+      <div>
+        <header role="banner">
+          <h1>Leaf Pile</h1>
+        </header>
+        {feed}
+      </div>
+    </Error>
+  );
+};
 
-export default Feed
+Feed.propTypes = {
+  posts: PropTypes.array
+};
+

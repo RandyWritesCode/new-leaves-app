@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Error from '../AppError/AppError';
 
-function Display(props) {
+
+export default function Display(props) {
   let feed
   if (props.display !== '') {
     feed = props.display.map((post, idx) => {
@@ -15,17 +18,24 @@ function Display(props) {
         <button>Edit</button>
         <button>Delete</button>
       </section>
-      )
+      );
     })
   }
 
 
   return (
-    <div>
+    <Error>
 
-      {feed}
-    </div>
-  )
-}
+      <div>
+        {feed}
+      </div>
+    </Error>
+  );
+};
 
-export default Display
+Display.propTypes = {
+  display: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
+};

@@ -1,23 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Nav.css';
+import Error from '../AppError/AppError';
 
 
-function Nav() {
+export default function Nav() {
   return (
-    <nav>
-      <header>
-        <h3>  New Leaves 🍃 </h3>
-      </header>
-      <ul >
-        <li><a href="Login">Login</a></li>
-        <li><a href="Search">Search</a></li>
-        <li><a href="Post">New Leaf</a></li>
-        <li><a href="Feed">Leaf Pile</a></li>
-        <li><a href="/">Home</a></li>
-        <li><a href="SignUp">Sign-up</a></li>
-      </ul>
-    </nav>
-  )
-}
+    <Error>
 
-export default Nav;
+      <nav>
+        <header>
+          <h3> <a href="/">New Leaves 🍃</a></h3>
+        </header>
+        <ul >
+          <li><Link to="/Login">Login</Link></li>
+          <li><Link to="/Search">Search</Link></li>
+          <li><Link to="/Post">New Leaf</Link></li>
+          <li><Link to="/Feed">Leaf Pile</Link></li>
+          <li><Link to="/SignUp">Sign-up</Link></li>
+        </ul>
+      </nav>
+    </Error>
+
+  );
+};
+
