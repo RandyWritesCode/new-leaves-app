@@ -7,9 +7,8 @@ import Search from '../Search/Search';
 import Feed from '../Feed/Feed';
 import Home from '../Home/Home';
 import Post from '../Post/Post';
-import STORE from '../../dummyStore';
 import Error from '../AppError/AppError';
-
+import config from '../../config';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,7 +19,7 @@ export default class App extends React.Component {
       display: '',
 
       store: {
-        posts: STORE.posts
+        posts: []
       },
 
       postType: '',
@@ -30,6 +29,7 @@ export default class App extends React.Component {
     }
     console.log(this.state.store.posts)
   };
+
 
   handleSearchTermChange = event => {
     this.setState({
@@ -81,10 +81,10 @@ export default class App extends React.Component {
 
   handlePostSubmit = (event) => {
     event.preventDefault()
-    const { store: { posts }, postTitle, postSummary, postType } = this.state
-    console.log(posts)
+    const { store: { posts }, postTitle, postSummary, postType, id } = this.state
 
     let newPost = {
+      id: id,
       title: postTitle,
       summary: postSummary,
       type: postType
@@ -92,14 +92,34 @@ export default class App extends React.Component {
 
     let updatedPost = [...posts, newPost]
     console.log(updatedPost)
+
     this.setState({
       store: {
         posts: updatedPost
       }
     })
+
     console.log(this.state.store.posts)
   };
 
+  componentDidMount() {
+    fetch(`${config.API_ENDPOINT}/api/posts`)
+      .then(res => {
+        if (!res.ok) {
+          return res.json.then(error => Promise.reject(error))
+        }
+        return res.json()
+      })
+      .then(posts => {
+        console.log(posts);
+        this.setState({
+          store: {
+            posts: posts
+          }
+        })
+      })
+      .catch(error => this.setState({ error }))
+  }
 
   render() {
 
