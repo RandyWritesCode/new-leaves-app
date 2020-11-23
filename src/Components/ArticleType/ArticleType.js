@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function PostType(props) {
+export default function ArticleType(props) {
   return (
     <>
       <input
@@ -10,7 +10,7 @@ export default function PostType(props) {
         id="none"
         value=""
         class="leaf-type-radio"
-        checked={props.postType === ''} />
+        checked={props.articleType === ''} />
       <label for="none">
         <span>None</span>
         <p class="leaf-type-explanation">To help other users find your post,
@@ -23,7 +23,7 @@ export default function PostType(props) {
         id="family"
         value="Family"
         class="leaf-type-radio"
-        checked={props.postType === 'Family'}
+        checked={props.articleType === 'Family'}
       />
       <label for="family">
         <span>Family</span>
@@ -37,7 +37,7 @@ export default function PostType(props) {
         id="holiday"
         value="Holiday"
         class="leaf-type-radio"
-        checked={props.postType === 'Holiday'}
+        checked={props.articleType === 'Holiday'}
       />
       <label for="holiday">
         <span>Holiday</span>
@@ -51,7 +51,7 @@ export default function PostType(props) {
         id="daily-practice"
         value="Daily Practice"
         class="leaf-type-radio"
-        checked={props.postType === 'Daily Practice'}
+        checked={props.articleType === 'Daily Practice'}
       />
       <label for="daily-practice">
         <span>Daily Practice</span>
@@ -65,7 +65,7 @@ export default function PostType(props) {
         id="adaptation"
         value="Adaptation"
         class="leaf-type-radio"
-        checked={props.postType === 'Adaptation'}
+        checked={props.articleType === 'Adaptation'}
       />
       <label for="adaptation">
         <span>Adaptation</span>
@@ -79,7 +79,7 @@ export default function PostType(props) {
         id="clothing"
         value="Clothing"
         class="leaf-type-radio"
-        checked={props.postType === 'Clothing'}
+        checked={props.articleType === 'Clothing'}
       />
       <label for="clothing">
         <span>Clothing</span>
@@ -92,7 +92,7 @@ export default function PostType(props) {
         id="food"
         value="Food"
         class="leaf-type-radio"
-        checked={props.postType === 'Food'}
+        checked={props.articleType === 'Food'}
       />
       <label for="food">
         <span>Food</span>

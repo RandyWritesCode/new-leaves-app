@@ -15,7 +15,7 @@ export default function Nav() {
         <ul >
           <li><Link to="/Login">Login</Link></li>
           <li><Link to="/Search">Search</Link></li>
-          <li><Link to="/Post">New Leaf</Link></li>
+          <li><Link to="/AddArticle">New Leaf</Link></li>
           <li><Link to="/Feed">Leaf Pile</Link></li>
           <li><Link to="/SignUp">Sign-up</Link></li>
         </ul>

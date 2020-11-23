@@ -1,12 +1,12 @@
 import React from 'react';
-import './Post.css';
-import PostType from '../PostType/PostType';
+import './Article.css';
+import ArticleType from '../ArticleType/ArticleType';
 import PropTypes from 'prop-types';
 import Error from '../AppError/AppError';
 
 
 
-export default function Post(props) {
+export default function Article(props) {
   return (
     <Error>
       <div>
@@ -15,21 +15,21 @@ export default function Post(props) {
           <p>(under construction)</p>
         </header>
         <section>
-          <form id="record-leaf" onSubmit={props.handlePostSubmit}>
+          <form id="record-leaf" onSubmit={props.handleArticleSubmit}>
             <section class="form-section overview-section">
               <label for="leaf-title">Leaf title</label>
-              <input type="text" name="leaf-title" placeholder="Winnie the Pooh Day" required onChange={props.handlePostTitleChange} />
+              <input type="text" name="leaf-title" placeholder="Winnie the Pooh Day" required onChange={props.handleArticleTitleChange} />
             </section>
 
             <section class="form-section overview-section">
               <label for="leaf-summary">Leaf summary</label>
-              <textarea name="leaf-summary" rows="15" required onChange={props.handlePostSummaryChange}></textarea>
+              <textarea name="leaf-summary" rows="15" required onChange={props.handleArticleSummaryChange}></textarea>
             </section>
 
-            <section class="form-section leaf-type-section" onChange={props.handlePostTypeChange}>
+            <section class="form-section leaf-type-section" onChange={props.handleArticleTypeChange}>
               <h2>Select Leaf Type</h2>
               <Error>
-                <PostType postType={props.state.postType} />
+                <ArticleType articleType={props.state.articleType} />
               </Error>
             </section>
 
@@ -45,10 +45,10 @@ export default function Post(props) {
   );
 };
 
-Post.postTypes = {
-  handlePostSubmit: PropTypes.func,
-  handlePostTitleChange: PropTypes.func,
-  handlePostSummaryChange: PropTypes.func,
-  handlePostTypeChange: PropTypes.func,
-  postType: PropTypes.string
+Article.propTypes = {
+  handleArticleSubmit: PropTypes.func,
+  handleArticleTitleChange: PropTypes.func,
+  handleArticleSummaryChange: PropTypes.func,
+  handleArticleTypeChange: PropTypes.func,
+  articleType: PropTypes.string
 };

@@ -6,7 +6,7 @@ import SignUp from '../SignUp/SignUp';
 import Search from '../Search/Search';
 import Feed from '../Feed/Feed';
 import Home from '../Home/Home';
-import Post from '../Post/Post';
+import Article from '../Article/Article';
 import Error from '../AppError/AppError';
 import config from '../../config';
 
@@ -19,16 +19,16 @@ export default class App extends React.Component {
       display: '',
 
       store: {
-        posts: []
+        articles: []
       },
 
-      postType: '',
-      postTitle: '',
-      postSummary: '',
+      articleType: '',
+      articleTitle: '',
+      articleSummary: '',
 
 
     }
-    console.log(this.state.store.posts)
+    // console.log(this.state.store.articles)
   };
 
 
@@ -46,75 +46,89 @@ export default class App extends React.Component {
 
   handleSearchSubmit = (event) => {
     event.preventDefault()
-    let display = this.state.store.posts.filter(post => {
+    let display = this.state.store.articles.filter(article => {
       let searchTerm = this.state.searchTerm.toLowerCase()
-      let postValue = post[this.state.searchCategory].toLowerCase()
-      return postValue.includes(searchTerm)
+      let articleValue = article[this.state.searchCategory].toLowerCase()
+      return articleValue.includes(searchTerm)
     })
     this.setState({
       display: display
     })
   };
 
-  handlePostTitleChange = event => {
-    let postTitle = event.target.value
+  handleArticleTitleChange = event => {
+    let articleTitle = event.target.value
     this.setState({
-      postTitle: postTitle
+      articleTitle: articleTitle
     })
-    console.log(this.state.postTitle)
+    // console.log(this.state.articleTitle)
   };
 
-  handlePostSummaryChange = event => {
-    let postSummary = event.target.value
+  handleArticleSummaryChange = event => {
+    let articleSummary = event.target.value
     this.setState({
-      postSummary: postSummary
+      articleSummary: articleSummary
     })
-    console.log(this.state.postSummary)
+    // console.log(this.state.articleSummary)
   };
 
-  handlePostTypeChange = event => {
-    let postType = event.target.value
+  handleArticleTypeChange = event => {
+    let articleType = event.target.value
     this.setState({
-      postType: postType
+      articleType: articleType
     })
-    console.log(this.state.postType)
+    // console.log(this.state.articleType)
   };
 
-  handlePostSubmit = (event) => {
+  handleArticleSubmit = (event) => {
     event.preventDefault()
-    const { store: { posts }, postTitle, postSummary, postType } = this.state
+    const { store: { articles }, articleTitle, articleSummary, articleType } = this.state
 
-    let newPost = {
-      title: postTitle,
-      summary: postSummary,
-      type: postType
+    let newArticle = {
+      title: articleTitle,
+      summary: articleSummary,
+      type: articleType
     }
 
-    let updatedPost = [...posts, newPost]
-    // console.log(updatedPost)
+    let updatedArticle = [...articles, newArticle]
+    // console.log(updatedArticle)
 
     this.setState({
       store: {
-        posts: updatedPost
+        articles: updatedArticle
       }
     })
 
-    //console.log(this.state.store.posts)
+    fetch(`${config.API_ENDPOINT}/api/articles`, {
+      method: 'POST',
+      'content-type': 'application/json',
+      'mode': 'cors',
+      'Access-Control-Allow-Origin': '*'
+    })
+      .then(res => {
+
+        return res.json()
+      })
+      .then(data => {
+        console.log(data)
+
+      })
+    // console.log(this.state.store.articles)
   };
 
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/api/posts`)
+    fetch(`${config.API_ENDPOINT}/api/articles`)
       .then(res => {
         if (!res.ok) {
           return res.json.then(error => Promise.reject(error))
         }
         return res.json()
       })
-      .then(posts => {
-        console.log(posts);
+      .then(articles => {
+        console.log(articles);
         this.setState({
           store: {
-            posts: posts
+            articles: articles
           }
         })
       })
@@ -146,19 +160,19 @@ export default class App extends React.Component {
                 path={'/Feed'}
                 render={() => (
                   <Feed
-                    posts={this.state.store.posts}
+                    articles={this.state.store.articles}
                   />
                 )}
               />
               <Route
-                path={'/Post'}
+                path={'/AddArticle'}
                 render={() => (
-                  <Post
-                    handlePostTypeChange={this.handlePostTypeChange}
-                    handlePostSubmit={this.handlePostSubmit}
+                  <Article
+                    handleArticleTypeChange={this.handleArticleTypeChange}
+                    handleArticleSubmit={this.handleArticleSubmit}
                     state={this.state}
-                    handlePostTitleChange={this.handlePostTitleChange}
-                    handlePostSummaryChange={this.handlePostSummaryChange}
+                    handleArticleTitleChange={this.handleArticleTitleChange}
+                    handleArticleSummaryChange={this.handleArticleSummaryChange}
                   />
                 )}
               />
@@ -166,7 +180,7 @@ export default class App extends React.Component {
                 path={'/Search'}
                 render={() => (
                   <Search
-                    posts={this.state.store.posts}
+                    articles={this.state.store.articles}
                     handleSearchTermChange={this.handleSearchTermChange}
                     handleSearchTypeChange={this.handleSearchTypeChange}
                     handleSearchSubmit={this.handleSearchSubmit}

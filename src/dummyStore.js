@@ -1,5 +1,5 @@
 let STORE = {
-  posts: [
+  articles: [
     {
       title: 'How My Family Celebrates Winnie-The-Pooh Day!!!',
       summary: `Praesent sagittis a mi sit amet dictum. 

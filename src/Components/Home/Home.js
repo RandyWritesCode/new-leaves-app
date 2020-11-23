@@ -21,7 +21,7 @@ export default function Home() {
           <header>
             <h3>Traditions worth sharing!</h3>
           </header>
-          <p>Have a tradition worth sharing?  Post it so that others can start practicing it.</p>
+          <p>Have a tradition worth sharing?  Article it so that others can start practicing it.</p>
         </section>
 
         <section>

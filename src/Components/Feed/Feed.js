@@ -4,16 +4,16 @@ import Error from '../AppError/AppError';
 
 
 export default function Feed(props) {
-  console.log(props.posts)
+  console.log(props.articles)
 
-  let feed = props.posts.map((post, idx) => {
+  let feed = props.articles.map((article, idx) => {
 
     return (<section key={idx}>
       <header>
-        <h2>{post.title}</h2>
-        <p>{post.type}</p>
+        <h2>{article.title}</h2>
+        <p>{article.type}</p>
       </header>
-      <blockquote>{post.summary}</blockquote>
+      <blockquote>{article.summary}</blockquote>
 
       <button>Edit</button>
       <button>Delete</button>
@@ -34,6 +34,6 @@ export default function Feed(props) {
 };
 
 Feed.propTypes = {
-  posts: PropTypes.array
+  articles: PropTypes.array
 };
 
