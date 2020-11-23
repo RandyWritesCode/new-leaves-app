@@ -1,6 +1,6 @@
 import React from 'react';
 import './Post.css';
-import LeafType from '../PostType/PostType';
+import PostType from '../PostType/PostType';
 import PropTypes from 'prop-types';
 import Error from '../AppError/AppError';
 
@@ -29,7 +29,7 @@ export default function Post(props) {
             <section class="form-section leaf-type-section" onChange={props.handlePostTypeChange}>
               <h2>Select Leaf Type</h2>
               <Error>
-                <LeafType postType={props.state.postType} />
+                <PostType postType={props.state.postType} />
               </Error>
             </section>
 

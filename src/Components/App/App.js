@@ -26,6 +26,7 @@ export default class App extends React.Component {
       postTitle: '',
       postSummary: '',
 
+
     }
     console.log(this.state.store.posts)
   };
@@ -81,17 +82,16 @@ export default class App extends React.Component {
 
   handlePostSubmit = (event) => {
     event.preventDefault()
-    const { store: { posts }, postTitle, postSummary, postType, id } = this.state
+    const { store: { posts }, postTitle, postSummary, postType } = this.state
 
     let newPost = {
-      id: id,
       title: postTitle,
       summary: postSummary,
       type: postType
     }
 
     let updatedPost = [...posts, newPost]
-    console.log(updatedPost)
+    // console.log(updatedPost)
 
     this.setState({
       store: {
@@ -99,7 +99,7 @@ export default class App extends React.Component {
       }
     })
 
-    console.log(this.state.store.posts)
+    //console.log(this.state.store.posts)
   };
 
   componentDidMount() {
