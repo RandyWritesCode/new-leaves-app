@@ -4,14 +4,14 @@ import Error from '../AppError/AppError';
 
 
 export default function Display(props) {
-  let feed
+  let article
   if (props.display !== '') {
-    feed = props.display.map((article, idx) => {
+    article = props.display.map((article, idx) => {
 
       return (<section key={idx}>
         <header>
           <h2>{article.title}</h2>
-          <p>{article.type}</p>
+          <p>{article.article_type}</p>
         </header>
         <blockquote>{article.summary}</blockquote>
 
@@ -27,7 +27,7 @@ export default function Display(props) {
     <Error>
 
       <div>
-        {feed}
+        {article}
       </div>
     </Error>
   );

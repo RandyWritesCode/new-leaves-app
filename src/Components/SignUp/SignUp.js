@@ -9,7 +9,6 @@ export default function SignUp() {
       <section>
         <header>
           <h3>Sign Up</h3>
-          <p>(under construction)</p>
         </header>
         <form class='signup-form'>
           <div>

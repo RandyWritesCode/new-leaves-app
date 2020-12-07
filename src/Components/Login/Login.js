@@ -1,14 +1,16 @@
 import React from 'react';
 import Error from '../AppError/AppError';
 
-export default function Login() {
+export default function Login(props) {
+
+
+
   return (
     <Error>
 
       <section>
         <header>
           <h3>Log in </h3>
-          <p>(under construction)</p>
 
         </header>
         <p>Demo Account:</p>
@@ -18,16 +20,23 @@ export default function Login() {
         <p>
           Password: 123abc$
           </p>
-        <form class='signup-form'>
+        <form class='signup-form' onSubmit={props.handleSubmitBasicAuth}>
           <div>
             <label for="username">Username</label>
-            <input placeholder='Username' type="text" name='username' id='username' />
+            <input
+              placeholder='Username'
+              type="text"
+              name='username'
+              id='username' />
           </div>
           <div>
             <label for="password">Password</label>
-            <input type="password" name='password' id='password' />
+            <input
+              type="password"
+              name='password'
+              id='password' />
           </div>
-          <button type='submit'>Sign Up</button>
+          <button type='submit'>Login</button>
         </form>
       </section>
     </Error>

@@ -1,16 +1,21 @@
 import React from 'react';
 import Nav from '../Nav/Nav';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
 import Search from '../Search/Search';
-import Feed from '../Feed/Feed';
+import Articles from '../Articles/Articles';
+import ArticleDetails from '../ArticleDetails/ArticleDetails';
 import Home from '../Home/Home';
-import Article from '../Article/Article';
+import AddArticle from '../AddArticle/AddArticle';
 import Error from '../AppError/AppError';
 import config from '../../config';
+import NewLeavesContext from '../../NewLeavesContext';
+import TokenService from '../../services/token-services';
+import PrivateRoute from '../Utils/PrivateRoute';
+import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,15 +26,25 @@ export default class App extends React.Component {
       store: {
         articles: []
       },
-
+      article: {},
       articleType: '',
       articleTitle: '',
       articleSummary: '',
 
-
     }
-    // console.log(this.state.store.articles)
   };
+
+
+  handleSubmitBasicAuth = ev => {
+    ev.preventDefault()
+    const { username, password } = ev.target
+
+    TokenService.saveAuthToken(
+      TokenService.makeBasicAuthToken(username.value, password.value)
+    )
+
+    this.props.history.push('/articles')
+  }
 
 
   handleSearchTermChange = event => {
@@ -61,7 +76,7 @@ export default class App extends React.Component {
     this.setState({
       articleTitle: articleTitle
     })
-    // console.log(this.state.articleTitle)
+    console.log(this.state.articleTitle)
   };
 
   handleArticleSummaryChange = event => {
@@ -69,7 +84,7 @@ export default class App extends React.Component {
     this.setState({
       articleSummary: articleSummary
     })
-    // console.log(this.state.articleSummary)
+    console.log(this.state.articleSummary)
   };
 
   handleArticleTypeChange = event => {
@@ -77,55 +92,59 @@ export default class App extends React.Component {
     this.setState({
       articleType: articleType
     })
-    // console.log(this.state.articleType)
+    console.log(this.state.articleType)
   };
 
-  handleArticleSubmit = (event) => {
+  handleArticleSubmit = (event, addArticleByContext) => {
     event.preventDefault()
-    const { store: { articles }, articleTitle, articleSummary, articleType } = this.state
+    const { articleTitle, articleSummary, articleType } = this.state
 
-    let newArticle = {
-      title: articleTitle,
-      summary: articleSummary,
-      type: articleType
-    }
-
-    let updatedArticle = [...articles, newArticle]
-    // console.log(updatedArticle)
-
-    this.setState({
-      store: {
-        articles: updatedArticle
-      }
-    })
 
     fetch(`${config.API_ENDPOINT}/api/articles`, {
-      method: 'POST',
-      'content-type': 'application/json',
-      'mode': 'cors',
-      'Access-Control-Allow-Origin': '*'
+      'method': 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'mode': 'cors',
+        'Access-Control-Allow-Origin': '*',
+        'authorization': `basic ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({ title: articleTitle, summary: articleSummary, article_type: articleType }),
     })
       .then(res => {
-
+        if (!res.ok) {
+          return res.json().then(error => {
+            throw error
+          })
+        }
         return res.json()
       })
       .then(data => {
         console.log(data)
-
+        addArticleByContext(data)
       })
-    // console.log(this.state.store.articles)
+      .catch(error => {
+        console.error(error)
+      })
   };
 
+
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/api/articles`)
+    fetch(`${config.API_ENDPOINT}/api/articles`,
+      {
+        headers: {
+          'authorization': `basic ${TokenService.getAuthToken()}`,
+        }
+      }
+    )
       .then(res => {
+        console.log(res)
         if (!res.ok) {
           return res.json.then(error => Promise.reject(error))
         }
         return res.json()
       })
       .then(articles => {
-        console.log(articles);
+        console.log("articles from fetch", articles);
         this.setState({
           store: {
             articles: articles
@@ -135,66 +154,119 @@ export default class App extends React.Component {
       .catch(error => this.setState({ error }))
   }
 
+  deleteArticle = (articleId) => {
+    const newArticles = this.state.store.articles.filter(article =>
+      article.id !== articleId
+    )
+    console.log(newArticles)
+    this.setState({
+      store: {
+        articles: newArticles
+      }
+    })
+  }
+
+  addArticle = (articleToAdd) => {
+    let newArticle = {
+      id: articleToAdd.id,
+      title: articleToAdd.title,
+      summary: articleToAdd.summary,
+      article_type: articleToAdd.article_type,
+      date_published: articleToAdd.date_published
+    }
+
+    const updatedArticle = [...this.state.store.articles, newArticle]
+    this.setState({
+      store: {
+        articles: updatedArticle
+      }
+    })
+  }
+
   render() {
+    const contextValue = {
+      deleteArticle: this.deleteArticle,
+      addArticle: this.addArticle,
+
+    }
 
     return (
-      <body className="App">
-        <Nav />
-        <main>
-          <Error>
-            <Switch>
-              <Route
-                exact
-                path={'/'}
-                component={Home}
-              />
-              <Route
-                path={'/Login'}
-                component={Login}
-              />
-              <Route
-                path={'/SignUP'}
-                component={SignUp}
-              />
-              <Route
-                path={'/Feed'}
-                render={() => (
-                  <Feed
-                    articles={this.state.store.articles}
-                  />
-                )}
-              />
-              <Route
-                path={'/AddArticle'}
-                render={() => (
-                  <Article
-                    handleArticleTypeChange={this.handleArticleTypeChange}
-                    handleArticleSubmit={this.handleArticleSubmit}
-                    state={this.state}
-                    handleArticleTitleChange={this.handleArticleTitleChange}
-                    handleArticleSummaryChange={this.handleArticleSummaryChange}
-                  />
-                )}
-              />
-              <Route
-                path={'/Search'}
-                render={() => (
-                  <Search
-                    articles={this.state.store.articles}
-                    handleSearchTermChange={this.handleSearchTermChange}
-                    handleSearchTypeChange={this.handleSearchTypeChange}
-                    handleSearchSubmit={this.handleSearchSubmit}
-                    display={this.state.display}
-                  />
-                )}
-              />
+      <NewLeavesContext.Provider value={contextValue}>
 
-            </Switch>
-          </ Error >
-        </main>
-      </body>
+        <body className="App">
+          <Nav />
+          <main>
+            <Error>
+              <Switch>
+                <Route
+                  exact
+                  path={'/'}
+                  component={Home}
+                />
+                <PublicOnlyRoute
+                  path={'/login'}
+                  render={() => (
+                    <Login
+                      handleSubmitBasicAuth={this.handleSubmitBasicAuth}
+                    />
+                  )}
+                />
+                <PublicOnlyRoute
+                  path={'/signup'}
+                  component={SignUp}
+                />
+                <Route
+                  exact
+                  path={'/articles'}
+                  render={() => (
+                    <Articles
+                      articles={this.state.store.articles}
+                    />
+                  )}
+                />
+                <PrivateRoute
+                  path={'/articles/:articleId'}
+                  render={(routeProps) => (
+                    <ArticleDetails
+                      articles={this.state.store.articles}
+                      {...routeProps}
+                    />
+                  )}
+                />
+                <Route
+                  path={'/addarticle'}
+                  render={() => (
+                    <AddArticle
+                      handleArticleTypeChange={this.handleArticleTypeChange}
+                      handleArticleSubmit={this.handleArticleSubmit}
+                      state={this.state}
+                      handleArticleTitleChange={this.handleArticleTitleChange}
+                      handleArticleSummaryChange={this.handleArticleSummaryChange}
+                    />
+                  )}
+                />
+                <Route
+                  path={'/search'}
+                  render={() => (
+                    <Search
+                      articles={this.state.store.articles}
+                      handleSearchTermChange={this.handleSearchTermChange}
+                      handleSearchTypeChange={this.handleSearchTypeChange}
+                      handleSearchSubmit={this.handleSearchSubmit}
+                      display={this.state.display}
+                    />
+                  )}
+                />
+
+              </Switch>
+            </ Error >
+          </main>
+        </body>
+
+      </NewLeavesContext.Provider >
     );
   }
 }
 
 
+export default withRouter(App)
