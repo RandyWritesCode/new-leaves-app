@@ -14,6 +14,7 @@ import NewLeavesContext from '../../NewLeavesContext';
 import TokenService from '../../services/token-services';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
+import AuthApiService from '../../services/auth-api-service';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,9 +32,49 @@ class App extends React.Component {
       articleTitle: '',
       articleSummary: '',
 
+      error: null,
+
     }
   };
 
+  static defaultProps = {
+    location: {},
+    history: {
+      push: () => { },
+    },
+  }
+
+  handleLoginSuccess = () => {
+    const { location, history } = this.props
+    const destination = (location.state || {}).from || '/'
+    history.push(destination)
+  }
+
+
+  handleSubmitJwtAuth = ev => {
+    // console.log("i'm in the JWT auth funciton!!!")
+    ev.preventDefault()
+    this.setState({ error: null })
+    const { username, password } = ev.target
+    console.log("the buck stops here!!!!!!", "username: ", username.value, " and password: ", password.value)
+    AuthApiService.postLogin({
+      username: username.value,
+      password: password.value,
+    })
+      .then(res => {
+        // console.logI('in the response from JWT Auth: ', res);
+        username.value = ''
+        password.value = ''
+        TokenService.saveAuthToken(res.authToken)
+        this.handleLoginSuccess()
+      })
+      .catch(res => {
+        // console.log('catch');
+        // console.log(res);
+        this.setState({ error: res.error })
+      })
+    this.props.history.push('/articles')
+  }
 
   handleSubmitBasicAuth = ev => {
     ev.preventDefault()
@@ -99,14 +140,13 @@ class App extends React.Component {
     event.preventDefault()
     const { articleTitle, articleSummary, articleType } = this.state
 
-
-    fetch(`${config.API_ENDPOINT}/api/articles`, {
+    fetch(`${config.API_ENDPOINT}/articles`, {
       'method': 'POST',
-      headers: {
+      'headers': {
         'content-type': 'application/json',
         'mode': 'cors',
         'Access-Control-Allow-Origin': '*',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({ title: articleTitle, summary: articleSummary, article_type: articleType }),
     })
@@ -129,29 +169,30 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/api/articles`,
-      {
-        headers: {
-          'authorization': `basic ${TokenService.getAuthToken()}`,
-        }
-      }
-    )
-      .then(res => {
-        console.log(res)
-        if (!res.ok) {
-          return res.json.then(error => Promise.reject(error))
-        }
-        return res.json()
-      })
-      .then(articles => {
-        console.log("articles from fetch", articles);
-        this.setState({
-          store: {
-            articles: articles
-          }
-        })
-      })
-      .catch(error => this.setState({ error }))
+    // fetch(`${config.API_ENDPOINT}/articles`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       'authorization': `bearer ${TokenService.getAuthToken()}`,
+    //     }
+    //   }
+    // )
+    //   .then(res => {
+    //     console.log(res)
+    //     if (!res.ok) {
+    //       return res.json.then(error => Promise.reject(error))
+    //     }
+    //     return res.json()
+    //   })
+    //   .then(articles => {
+    //     console.log("articles from fetch", articles);
+    //     this.setState({
+    //       store: {
+    //         articles: articles
+    //       }
+    //     })
+    //   })
+    //   .catch(error => this.setState({ error }))
   }
 
   deleteArticle = (articleId) => {
@@ -203,11 +244,12 @@ class App extends React.Component {
                   path={'/'}
                   component={Home}
                 />
-                <PublicOnlyRoute
+                <Route
                   path={'/login'}
-                  render={() => (
+                  render={(routeProps) => (
                     <Login
-                      handleSubmitBasicAuth={this.handleSubmitBasicAuth}
+                      handleSubmitJwtAuth={this.handleSubmitJwtAuth}
+                      {...routeProps}
                     />
                   )}
                 />
@@ -215,7 +257,7 @@ class App extends React.Component {
                   path={'/signup'}
                   component={SignUp}
                 />
-                <Route
+                <PrivateRoute
                   exact
                   path={'/articles'}
                   render={() => (

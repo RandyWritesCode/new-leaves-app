@@ -4,7 +4,9 @@ const NewLeavesContext = React.createContext({
   // articles: [],
   deleteArticle: () => { },
   editArticle: () => { },
-  addArticle: () => { }
+  addArticle: () => { },
+  onLoginSuccess: () => { }
+
 
 })
 

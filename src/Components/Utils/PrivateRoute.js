@@ -2,8 +2,8 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import TokenService from '../../services/token-services'
 
-export default function PrivateRoute({ component, ...props }) {
-  const Component = component
+export default function PrivateRoute({ render, ...props }) {
+  const Component = render
   return (
     <Route
       {...props}

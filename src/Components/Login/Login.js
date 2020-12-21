@@ -1,10 +1,10 @@
 import React from 'react';
 import Error from '../AppError/AppError';
+// import AuthApiService from '../../services/auth-api-service';
+// import TokenService from '../../services/token-services';
 
 export default function Login(props) {
-
-
-
+  console.log(props)
   return (
     <Error>
 
@@ -20,7 +20,7 @@ export default function Login(props) {
         <p>
           Password: 123abc$
           </p>
-        <form class='signup-form' onSubmit={props.handleSubmitBasicAuth}>
+        <form class='signup-form' onSubmit={props.handleSubmitJwtAuth}>
           <div>
             <label for="username">Username</label>
             <input
@@ -41,5 +41,6 @@ export default function Login(props) {
       </section>
     </Error>
   )
+
 };
 

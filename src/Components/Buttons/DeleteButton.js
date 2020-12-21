@@ -4,9 +4,9 @@ import NewLeavesContext from '../../NewLeavesContext';
 import TokenService from '../../services/token-services';
 
 function handleDeleteArticle(articleId, deleteNoteByContext) {
-  fetch(`${config.API_ENDPOINT}/api/articles/${articleId}`, {
+  fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
     method: 'DELETE',
-    'authorization': `basic ${TokenService.getAuthToken()}`,
+    'authorization': `bearer ${TokenService.getAuthToken()}`,
 
   })
     .then(res => {

@@ -10,9 +10,9 @@ import { Link } from 'react-router-dom'
 
 
 function handleDeleteArticle(articleId, deleteNoteByContext) {
-  fetch(`${config.API_ENDPOINT}/api/articles/${articleId}`, {
+  fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
     method: 'DELETE',
-    'authorization': `basic ${TokenService.getAuthToken()}`,
+    'authorization': `bearer ${TokenService.getAuthToken()}`,
 
   })
     .then(res => {
