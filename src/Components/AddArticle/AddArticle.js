@@ -21,17 +21,17 @@ export default function AddArticle(props) {
                 e,
                 context.addArticle
               )}>
-                <section class="form-section overview-section">
-                  <label for="leaf-title">Leaf title</label>
+                <section className="form-section overview-section">
+                  <label htmlFor="leaf-title">Leaf title</label>
                   <input type="text" name="leaf-title" placeholder="Winnie the Pooh Day" required onChange={props.handleArticleTitleChange} />
                 </section>
 
-                <section class="form-section overview-section">
-                  <label for="leaf-summary">Leaf summary</label>
+                <section className="form-section overview-section">
+                  <label htmlFor="leaf-summary">Leaf summary</label>
                   <textarea name="leaf-summary" rows="15" required onChange={props.handleArticleSummaryChange}></textarea>
                 </section>
 
-                <section class="form-section leaf-type-section" onChange={props.handleArticleTypeChange}>
+                <section className="form-section leaf-type-section" onChange={props.handleArticleTypeChange}>
                   <h2>Select Leaf Type</h2>
                   <Error>
                     <ArticleType articleType={props.state.articleType} />
@@ -39,7 +39,7 @@ export default function AddArticle(props) {
                 </section>
 
 
-                <section class="button-section">
+                <section className="button-section">
                   <button type="submit">Submit</button>
                   <button type="reset">Reset</button>
                 </section>

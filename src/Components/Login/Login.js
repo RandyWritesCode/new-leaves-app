@@ -4,7 +4,6 @@ import Error from '../AppError/AppError';
 // import TokenService from '../../services/token-services';
 
 export default function Login(props) {
-  console.log(props)
   return (
     <Error>
 
@@ -20,9 +19,9 @@ export default function Login(props) {
         <p>
           Password: 123abc$
           </p>
-        <form class='signup-form' onSubmit={props.handleSubmitJwtAuth}>
+        <form className='signup-form' onSubmit={props.handleSubmitJwtAuth}>
           <div>
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input
               placeholder='Username'
               type="text"
@@ -30,7 +29,7 @@ export default function Login(props) {
               id='username' />
           </div>
           <div>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               name='password'

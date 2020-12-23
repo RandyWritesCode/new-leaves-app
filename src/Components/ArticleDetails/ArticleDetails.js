@@ -11,7 +11,6 @@ function handleDeleteArticle(articleId, deleteNoteByContext) {
 
   })
     .then(res => {
-      console.log(res)
       if (!res.ok) {
         return res.json().then(error => {
           throw error
@@ -29,11 +28,8 @@ function handleDeleteArticle(articleId, deleteNoteByContext) {
 
 export default function ArticleDetails(props) {
 
-
-  console.log(props)
   const article = props.articles.find(a =>
     a.id === Number(props.match.params.articleId))
-  console.log(article)
   return (
     <NewLeavesContext.Consumer>
       {(context) => (

@@ -14,12 +14,12 @@ export default class Search extends React.Component {
             <header>
               <h4>Search our collection of shared traditions</h4>
             </header>
-            <form class='signup-form' onSubmit={this.props.handleSearchSubmit} >
+            <form className='signup-form' onSubmit={this.props.handleSearchSubmit} >
               <div>
-                <label for="search-term">Search Term</label>
+                <label htmlFor="search-term">Search Term</label>
                 <input onChange={this.props.handleSearchTermChange} placeholder='Potato Chip Day' type="text" name='search-term' id='search-term' />
               </div>
-              <div class="form-section leaf-type-section">
+              <div className="form-section leaf-type-section">
                 <p>Search by title, summary content or category.</p>
                 <select id="search-type" onChange={this.props.handleSearchTypeChange}>
                   <option value='title'>Title</option>

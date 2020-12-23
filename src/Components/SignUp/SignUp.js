@@ -1,8 +1,8 @@
 import React from 'react';
 import Error from '../AppError/AppError';
 
-
-export default function SignUp() {
+function SignUp(props) {
+  console.log(props)
   return (
     <Error>
 
@@ -10,26 +10,22 @@ export default function SignUp() {
         <header>
           <h3>Sign Up</h3>
         </header>
-        <form class='signup-form'>
+        <form className='signup-form' onSubmit={props.handleSignUpSubmit} >
           <div>
-            <label for="first-name">First name</label>
-            <input placeholder='First Name' type="text" name='first-name' id='first-name' required />
+            <label htmlFor="fullname">Full name:</label>
+            <input type="text" name='fullname' id='fullname' placeholder='Randy Douglas' value='Randy Douglas' required />
           </div>
           <div>
-            <label for="last-name">Last name</label>
-            <input type="text" name='last-name' id='last-name' placeholder='Last Name' required />
+            <label htmlFor="username">Username:</label>
+            <input type="text" name='username' id='username' placeholder='NewLeavesUser1' required />
           </div>
           <div>
-            <label for="username">Email</label>
-            <input type="text" name='username' id='username' required />
+            <label htmlFor="password">Password</label>
+            <input type="password" name='password' id='password' value='1Aa!2Bb@' required />
           </div>
           <div>
-            <label for="password">Password</label>
-            <input type="password" name='password' id='password' required />
-          </div>
-          <div>
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" name='confirm-password' id='confirm-password' required />
+            <label htmlFor="confirm-password">Confirm Password</label>
+            <input type="password" name='confirm-password' id='confirm-password' value='1Aa!2Bb@' required />
           </div>
           <button type='submit'>Sign Up</button>
         </form>
@@ -38,3 +34,4 @@ export default function SignUp() {
   );
 };
 
+export default SignUp;

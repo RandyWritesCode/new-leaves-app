@@ -16,7 +16,6 @@ function handleDeleteArticle(articleId, deleteNoteByContext) {
 
   })
     .then(res => {
-      console.log(res)
       if (!res.ok) {
         return res.json().then(error => {
           throw error
@@ -33,12 +32,11 @@ function handleDeleteArticle(articleId, deleteNoteByContext) {
 }
 
 export default function Article(props) {
-  console.log(props)
   let article = props.articles.map((article, idx) => {
 
-    return (<NewLeavesContext.Consumer>
+    return (<NewLeavesContext.Consumer key={idx}>
       {(context) => (
-        < section key={idx}>
+        < section >
           <header>
             <Link to={`/articles/${article.id}`} >
               <h2 >{article.title}</h2>

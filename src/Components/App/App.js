@@ -33,7 +33,6 @@ class App extends React.Component {
       articleSummary: '',
 
       error: null,
-
     }
   };
 
@@ -50,27 +49,21 @@ class App extends React.Component {
     history.push(destination)
   }
 
-
   handleSubmitJwtAuth = ev => {
-    // console.log("i'm in the JWT auth funciton!!!")
     ev.preventDefault()
     this.setState({ error: null })
     const { username, password } = ev.target
-    console.log("the buck stops here!!!!!!", "username: ", username.value, " and password: ", password.value)
     AuthApiService.postLogin({
       username: username.value,
       password: password.value,
     })
       .then(res => {
-        // console.logI('in the response from JWT Auth: ', res);
         username.value = ''
         password.value = ''
         TokenService.saveAuthToken(res.authToken)
         this.handleLoginSuccess()
       })
       .catch(res => {
-        // console.log('catch');
-        // console.log(res);
         this.setState({ error: res.error })
       })
     this.props.history.push('/articles')
@@ -117,7 +110,6 @@ class App extends React.Component {
     this.setState({
       articleTitle: articleTitle
     })
-    console.log(this.state.articleTitle)
   };
 
   handleArticleSummaryChange = event => {
@@ -125,7 +117,6 @@ class App extends React.Component {
     this.setState({
       articleSummary: articleSummary
     })
-    console.log(this.state.articleSummary)
   };
 
   handleArticleTypeChange = event => {
@@ -133,7 +124,6 @@ class App extends React.Component {
     this.setState({
       articleType: articleType
     })
-    console.log(this.state.articleType)
   };
 
   handleArticleSubmit = (event, addArticleByContext) => {
@@ -159,47 +149,80 @@ class App extends React.Component {
         return res.json()
       })
       .then(data => {
-        console.log(data)
         addArticleByContext(data)
+        this.props.history.push('/articles')
       })
       .catch(error => {
         console.error(error)
       })
   };
 
+  handleRegistrationSuccess = user => {
+    console.log(
+      'inside handleRegistrationSuccess function'
+    )
+    const { history } = this.props
+    history.push('/login')
+  }
+
+  handleSignUpSubmit = event => {
+    event.preventDefault()
+    console.log('inside handleSignUpSubmit function')
+    console.log(event)
+    const { fullname, username, password } = event.target
+
+    this.setState({ error: null })
+    AuthApiService.postUser({
+      username: username.value,
+      password: password.value,
+      fullname: fullname.value,
+    })
+      .then(user => {
+        fullname.value = ''
+        username.value = ''
+        password.value = ''
+        this.handleRegistrationSuccess()
+      })
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
+  }
+
+  refreshPage() {
+    this.props.history.push('/articles')
+
+  }
 
   componentDidMount() {
-    // fetch(`${config.API_ENDPOINT}/articles`,
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       'authorization': `bearer ${TokenService.getAuthToken()}`,
-    //     }
-    //   }
-    // )
-    //   .then(res => {
-    //     console.log(res)
-    //     if (!res.ok) {
-    //       return res.json.then(error => Promise.reject(error))
-    //     }
-    //     return res.json()
-    //   })
-    //   .then(articles => {
-    //     console.log("articles from fetch", articles);
-    //     this.setState({
-    //       store: {
-    //         articles: articles
-    //       }
-    //     })
-    //   })
-    //   .catch(error => this.setState({ error }))
+    fetch(`${config.API_ENDPOINT}/articles`,
+      {
+        method: 'GET',
+        headers: {
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        }
+      }
+    )
+      .then(res => {
+        if (!res.ok) {
+          return res.json.then(error => Promise.reject(error))
+        }
+        return res.json()
+      })
+      .then(articles => {
+        console.log("articles from fetch", articles);
+        this.setState({
+          store: {
+            articles: articles
+          }
+        })
+      })
+      .catch(error => this.setState({ error }))
   }
 
   deleteArticle = (articleId) => {
     const newArticles = this.state.store.articles.filter(article =>
       article.id !== articleId
     )
-    console.log(newArticles)
     this.setState({
       store: {
         articles: newArticles
@@ -228,13 +251,12 @@ class App extends React.Component {
     const contextValue = {
       deleteArticle: this.deleteArticle,
       addArticle: this.addArticle,
-
     }
 
     return (
       <NewLeavesContext.Provider value={contextValue}>
 
-        <body className="App">
+        <div className="App">
           <Nav />
           <main>
             <Error>
@@ -256,6 +278,7 @@ class App extends React.Component {
                 <PublicOnlyRoute
                   path={'/signup'}
                   component={SignUp}
+                  handleSignUpSubmit={this.handleSignUpSubmit}
                 />
                 <PrivateRoute
                   exact
@@ -303,7 +326,7 @@ class App extends React.Component {
               </Switch>
             </ Error >
           </main>
-        </body>
+        </div>
 
       </NewLeavesContext.Provider >
     );
