@@ -190,7 +190,6 @@ class App extends React.Component {
 
   refreshPage() {
     this.props.history.push('/articles')
-
   }
 
   componentDidMount() {
