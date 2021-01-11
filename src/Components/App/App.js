@@ -53,6 +53,7 @@ class App extends React.Component {
     ev.preventDefault()
     this.setState({ error: null })
     const { username, password } = ev.target
+    console.log('88', username.value, password.value)
     AuthApiService.postLogin({
       username: username.value,
       password: password.value,
@@ -170,6 +171,7 @@ class App extends React.Component {
     console.log('inside handleSignUpSubmit function')
     console.log(event)
     const { fullname, username, password } = event.target
+    console.log(fullname.value, username.value, password.value)
 
     this.setState({ error: null })
     AuthApiService.postUser({
@@ -187,12 +189,8 @@ class App extends React.Component {
         this.setState({ error: res.error })
       })
   }
-
-  refreshPage() {
-    this.props.history.push('/articles')
-  }
-
   componentDidMount() {
+    console.log('get auth', TokenService.getAuthToken())
     fetch(`${config.API_ENDPOINT}/articles`,
       {
         method: 'GET',
@@ -205,6 +203,7 @@ class App extends React.Component {
         if (!res.ok) {
           return res.json.then(error => Promise.reject(error))
         }
+
         return res.json()
       })
       .then(articles => {
@@ -217,7 +216,7 @@ class App extends React.Component {
       })
       .catch(error => this.setState({ error }))
   }
-
+  //handler to retireve data 
   deleteArticle = (articleId) => {
     const newArticles = this.state.store.articles.filter(article =>
       article.id !== articleId
@@ -245,6 +244,15 @@ class App extends React.Component {
       }
     })
   }
+
+  handleRetrieveArticles = (articles) => {
+    this.setState({
+      store: {
+        articles
+      }
+    })
+  }
+
 
   render() {
     const contextValue = {
@@ -285,6 +293,7 @@ class App extends React.Component {
                   render={() => (
                     <Articles
                       articles={this.state.store.articles}
+                      handleRetrieveArticles={this.handleRetrieveArticles}
                     />
                   )}
                 />

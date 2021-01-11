@@ -8,12 +8,10 @@ import TokenService from '../../services/token-services';
 import { Link } from 'react-router-dom'
 
 
-
 function handleDeleteArticle(articleId, deleteNoteByContext) {
   fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
     method: 'DELETE',
     'authorization': `bearer ${TokenService.getAuthToken()}`,
-
   })
     .then(res => {
       if (!res.ok) {
@@ -31,45 +29,74 @@ function handleDeleteArticle(articleId, deleteNoteByContext) {
     })
 }
 
-export default function Article(props) {
-  let article = props.articles.map((article, idx) => {
+class Article extends React.Component {
 
-    return (<NewLeavesContext.Consumer key={idx}>
-      {(context) => (
-        < section >
-          <header>
-            <Link to={`/articles/${article.id}`} >
-              <h2 >{article.title}</h2>
-            </Link>
-            <p>{article.article_type}</p>
-          </header>
-          <blockquote>{article.summary}</blockquote>
 
-          <button>Edit</button>
-          <button
-            onClick={() => handleDeleteArticle(article.id, context.deleteArticle)}
-          >
-            Delete
-      </button>
-
-        </section>
-      )}
-    </NewLeavesContext.Consumer >
+  componentDidMount() {
+    console.log('get auth', TokenService.getAuthToken())
+    fetch(`${config.API_ENDPOINT}/articles`,
+      {
+        method: 'GET',
+        headers: {
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        }
+      }
     )
-  })
+      .then(res => {
+        if (!res.ok) {
+          return res.json.then(error => Promise.reject(error))
+        }
+        return res.json()
+      })
+      .then(articles => {
+        console.log('new component', articles)
+        this.handleRetrieveArticles(articles)
 
-  return (
-    <Error>
-      <div>
-        <header role="banner">
-          <h1>Leaf Pile</h1>
-        </header>
-        {article}
-      </div>
-    </Error>
-  );
-};
+      })
+      .catch(error => this.setState({ error }))
+  }
+
+  render() {
+
+    return (
+      <Error>
+        <div>
+          <header role="banner">
+            <h1>Leaf Pile</h1>
+          </header>
+          {this.props.articles.map((article, idx) => {
+
+            return (<NewLeavesContext.Consumer key={idx}>
+              {(context) => (
+                < section >
+                  <header>
+                    <Link to={`/articles/${article.id}`} >
+                      <h2 >{article.title}</h2>
+                    </Link>
+                    <p>{article.article_type}</p>
+                  </header>
+                  <blockquote>{article.summary}</blockquote>
+
+                  <button>Edit</button>
+                  <button
+                    onClick={() => handleDeleteArticle(article.id, context.deleteArticle)}
+                  >
+                    Delete
+          </button>
+
+                </section>
+              )}
+            </NewLeavesContext.Consumer >
+            )
+          })}
+        </div>
+      </Error >
+    );
+  };
+}
 
 Article.propTypes = {
   articles: PropTypes.array
 };
+
+export default Article

@@ -2,7 +2,7 @@ import React from 'react';
 import Error from '../AppError/AppError';
 
 function SignUp(props) {
-  console.log(props)
+
   return (
     <Error>
 

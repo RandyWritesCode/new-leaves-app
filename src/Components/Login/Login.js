@@ -14,10 +14,10 @@ export default function Login(props) {
         </header>
         <p>Demo Account:</p>
         <p>
-          Username: Account1
+          Username: Randy
           </p>
         <p>
-          Password: 123abc$
+          Password: 1Aa!2Bb@
           </p>
         <form className='signup-form' onSubmit={props.handleSubmitJwtAuth}>
           <div>
