@@ -13,7 +13,7 @@ function SignUp(props) {
         <form className='signup-form' onSubmit={props.handleSignUpSubmit} >
           <div>
             <label htmlFor="fullname">Full name:</label>
-            <input type="text" name='fullname' id='fullname' placeholder='Randy Douglas' value='Randy Douglas' required />
+            <input type="text" name='fullname' id='fullname' placeholder='Randy Douglas' required />
           </div>
           <div>
             <label htmlFor="username">Username:</label>
@@ -21,11 +21,11 @@ function SignUp(props) {
           </div>
           <div>
             <label htmlFor="password">Password</label>
-            <input type="password" name='password' id='password' value='1Aa!2Bb@' required />
+            <input type="password" name='password' id='password' required />
           </div>
           <div>
             <label htmlFor="confirm-password">Confirm Password</label>
-            <input type="password" name='confirm-password' id='confirm-password' value='1Aa!2Bb@' required />
+            <input type="password" name='confirm-password' id='confirm-password' required />
           </div>
           <button type='submit'>Sign Up</button>
         </form>

@@ -15,6 +15,7 @@ import TokenService from '../../services/token-services';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import AuthApiService from '../../services/auth-api-service';
+import './App.css'
 
 class App extends React.Component {
   constructor(props) {
@@ -53,7 +54,6 @@ class App extends React.Component {
     ev.preventDefault()
     this.setState({ error: null })
     const { username, password } = ev.target
-    console.log('88', username.value, password.value)
     AuthApiService.postLogin({
       username: username.value,
       password: password.value,
@@ -96,15 +96,38 @@ class App extends React.Component {
 
   handleSearchSubmit = (event) => {
     event.preventDefault()
-    let display = this.state.store.articles.filter(article => {
-      let searchTerm = this.state.searchTerm.toLowerCase()
-      let articleValue = article[this.state.searchCategory].toLowerCase()
-      return articleValue.includes(searchTerm)
-    })
-    this.setState({
-      display: display
-    })
-  };
+    fetch(`${config.API_ENDPOINT}/articles`,
+      {
+        method: 'GET',
+        headers: {
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        }
+      }
+    )
+      .then(res => {
+        if (!res.ok) {
+          return res.json.then(error => Promise.reject(error))
+        }
+        return res.json()
+      })
+      .then(articles => {
+        console.log("articles from fetch2", articles);
+        let display = articles.filter(article => {
+          let searchTerm = this.state.searchTerm.toLowerCase()
+          let articleValue = article[this.state.searchCategory].toLowerCase()
+          return articleValue.includes(searchTerm)
+        })
+        this.setState({
+          display: display
+        })
+        this.setState({
+          store: {
+            articles: articles
+          }
+        })
+      })
+      .catch(error => this.setState({ error }))
+  }
 
   handleArticleTitleChange = event => {
     let articleTitle = event.target.value
@@ -159,19 +182,16 @@ class App extends React.Component {
   };
 
   handleRegistrationSuccess = user => {
-    console.log(
-      'inside handleRegistrationSuccess function'
-    )
+
     const { history } = this.props
     history.push('/login')
   }
 
   handleSignUpSubmit = event => {
     event.preventDefault()
-    console.log('inside handleSignUpSubmit function')
-    console.log(event)
+
     const { fullname, username, password } = event.target
-    console.log(fullname.value, username.value, password.value)
+    console.log(fullname.value, username.value)
 
     this.setState({ error: null })
     AuthApiService.postUser({
@@ -190,7 +210,6 @@ class App extends React.Component {
       })
   }
   componentDidMount() {
-    console.log('get auth', TokenService.getAuthToken())
     fetch(`${config.API_ENDPOINT}/articles`,
       {
         method: 'GET',
@@ -207,7 +226,7 @@ class App extends React.Component {
         return res.json()
       })
       .then(articles => {
-        console.log("articles from fetch", articles);
+        // console.log("articles from fetch", articles);
         this.setState({
           store: {
             articles: articles
@@ -246,9 +265,10 @@ class App extends React.Component {
   }
 
   handleRetrieveArticles = (articles) => {
+    console.log('app component', articles)
     this.setState({
       store: {
-        articles
+        articles: articles
       }
     })
   }
@@ -306,7 +326,7 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <Route
+                <PrivateRoute
                   path={'/addarticle'}
                   render={() => (
                     <AddArticle

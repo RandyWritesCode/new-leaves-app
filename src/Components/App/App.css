@@ -9,3 +9,9 @@ main {
   padding-top: 200px;  
   background-color: #bbb;
 }
+
+@media (max-width: 320px) {
+  * {
+    font-size: 4vw;
+  }
+}

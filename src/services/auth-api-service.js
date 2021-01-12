@@ -3,7 +3,6 @@ import TokenService from './token-services'
 
 const AuthApiService = {
   postLogin(credentials) {
-    console.log(credentials)
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
       method: 'POST',
       headers: {
@@ -13,7 +12,6 @@ const AuthApiService = {
       body: JSON.stringify(credentials),
     })
       .then(res => {
-        console.log(res)
         if (!res.ok) {
           return res.json().then(e => Promise.reject(e))
         } else {
@@ -25,7 +23,6 @@ const AuthApiService = {
       })
   },
   postUser(user) {
-    console.log(user)
     return fetch(`${config.API_ENDPOINT}/users`, {
       method: 'POST',
       headers: {

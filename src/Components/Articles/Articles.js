@@ -1,39 +1,19 @@
 import React from 'react';
 import config from '../../config'
 import NewLeavesContext from '../../NewLeavesContext'
-//import DeleteButton from '../Buttons/DeleteButton';
 import PropTypes from 'prop-types';
 import Error from '../AppError/AppError';
 import TokenService from '../../services/token-services';
 import { Link } from 'react-router-dom'
+import './Articles.css'
 
-
-function handleDeleteArticle(articleId, deleteNoteByContext) {
-  fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
-    method: 'DELETE',
-    'authorization': `bearer ${TokenService.getAuthToken()}`,
-  })
-    .then(res => {
-      if (!res.ok) {
-        return res.json().then(error => {
-          throw error
-        })
-      }
-      return res
-    })
-    .then(() => {
-      deleteNoteByContext(articleId)
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
 
 class Article extends React.Component {
-
+  // constructor(props) {
+  //   super(props)
+  // }
 
   componentDidMount() {
-    console.log('get auth', TokenService.getAuthToken())
     fetch(`${config.API_ENDPOINT}/articles`,
       {
         method: 'GET',
@@ -51,9 +31,29 @@ class Article extends React.Component {
       .then(articles => {
         console.log('new component', articles)
         this.handleRetrieveArticles(articles)
-
       })
       .catch(error => this.setState({ error }))
+  }
+
+  handleDeleteArticle = (articleId, deleteNoteByContext) => {
+    fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
+      method: 'DELETE',
+      'authorization': `bearer ${TokenService.getAuthToken()}`,
+    })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(error => {
+            throw error
+          })
+        }
+        return res
+      })
+      .then(() => {
+        deleteNoteByContext(articleId)
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   render() {
@@ -79,7 +79,7 @@ class Article extends React.Component {
 
                   <button>Edit</button>
                   <button
-                    onClick={() => handleDeleteArticle(article.id, context.deleteArticle)}
+                    onClick={() => this.handleDeleteArticle(article.id, context.deleteArticle)}
                   >
                     Delete
           </button>
