@@ -38,6 +38,9 @@ const AuthApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
+      .catch(err => {
+        console.log(err)
+      })
   },
 }
 
