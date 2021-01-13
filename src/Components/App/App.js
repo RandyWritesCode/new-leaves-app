@@ -81,7 +81,6 @@ class App extends React.Component {
     this.props.history.push('/articles')
   }
 
-
   handleSearchTermChange = event => {
     this.setState({
       searchTerm: event.target.value
