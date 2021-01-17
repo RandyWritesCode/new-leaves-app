@@ -36,26 +36,28 @@ class Article extends React.Component {
   //   // .catch(error => this.setState({ error }))
   // }
 
-  // handleDeleteArticle = (articleId, deleteNoteByContext) => {
-  //   fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
-  //     method: 'DELETE',
-  //     'authorization': `bearer ${TokenService.getAuthToken()}`,
-  //   })
-  //     .then(res => {
-  //       if (!res.ok) {
-  //         return res.json().then(error => {
-  //           throw error
-  //         })
-  //       }
-  //       return res
-  //     })
-  //     .then(() => {
-  //       deleteNoteByContext(articleId)
-  //     })
-  //     .catch(error => {
-  //       console.error(error)
-  //     })
-  // }
+  handleDeleteArticle = (articleId, deleteNoteByContext) => {
+    fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
+      method: 'DELETE',
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      },
+    })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(error => {
+            throw error
+          })
+        }
+        return res
+      })
+      .then(() => {
+        deleteNoteByContext(articleId)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
 
   render() {
 
@@ -80,11 +82,12 @@ class Article extends React.Component {
 
                   <button>Edit</button>
                   <button
-                    onClick={() => this.handleDeleteArticle(article.id, context.deleteArticle)}
+                    onClick={() =>
+                      this.handleDeleteArticle(article.id, context.deleteArticle)
+                    }
                   >
                     Delete
-          </button>
-
+                  </button>
                 </section>
               )}
             </NewLeavesContext.Consumer >

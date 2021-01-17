@@ -128,27 +128,27 @@ class App extends React.Component {
       .catch(error => this.setState({ error }))
   }
 
-  handleArticleTitleChange = event => {
-    // console.log(event.target.value)
-    let articleTitle = event.target.value
-    this.setState({
-      articleTitle: articleTitle
-    })
-  };
+  // handleArticleTitleChange = event => {
+  //   // console.log(event.target.value)
+  //   let articleTitle = event.target.value
+  //   this.setState({
+  //     articleTitle: articleTitle
+  //   })
+  // };
 
-  handleArticleSummaryChange = event => {
-    let articleSummary = event.target.value
-    this.setState({
-      articleSummary: articleSummary
-    })
-  };
+  // handleArticleSummaryChange = event => {
+  //   let articleSummary = event.target.value
+  //   this.setState({
+  //     articleSummary: articleSummary
+  //   })
+  // };
 
-  handleArticleTypeChange = event => {
-    let articleType = event.target.value
-    this.setState({
-      articleType: articleType
-    })
-  };
+  // handleArticleTypeChange = event => {
+  //   let articleType = event.target.value
+  //   this.setState({
+  //     articleType: articleType
+  //   })
+  // };
 
   handleArticleSubmit = (event, addArticleByContext) => {
     console.log(event.target)
@@ -157,7 +157,6 @@ class App extends React.Component {
     this.setState({
       articleTitle: articleTitle,
       articleSummary: articleSummary
-
     })
     event.preventDefault()
     // const { articleTitle, articleSummary, articleType } = this.state
