@@ -129,6 +129,7 @@ class App extends React.Component {
   }
 
   handleArticleTitleChange = event => {
+    // console.log(event.target.value)
     let articleTitle = event.target.value
     this.setState({
       articleTitle: articleTitle
@@ -150,8 +151,16 @@ class App extends React.Component {
   };
 
   handleArticleSubmit = (event, addArticleByContext) => {
+    console.log(event.target)
+    const articleTitle = event.target.leaf_title.value
+    const articleSummary = event.target.leaf_summary.value
+    this.setState({
+      articleTitle: articleTitle,
+      articleSummary: articleSummary
+
+    })
     event.preventDefault()
-    const { articleTitle, articleSummary, articleType } = this.state
+    // const { articleTitle, articleSummary, articleType } = this.state
 
     fetch(`${config.API_ENDPOINT}/articles`, {
       'method': 'POST',
@@ -161,7 +170,7 @@ class App extends React.Component {
         'Access-Control-Allow-Origin': '*',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ title: articleTitle, summary: articleSummary, article_type: articleType }),
+      body: JSON.stringify({ title: articleTitle, summary: articleSummary, article_type: '' }),
     })
       .then(res => {
         if (!res.ok) {

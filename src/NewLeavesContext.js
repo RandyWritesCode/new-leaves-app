@@ -1,7 +1,7 @@
 import React from 'react';
 
 const NewLeavesContext = React.createContext({
-  // articles: [],
+  articles: [],
   deleteArticle: () => { },
   editArticle: () => { },
   addArticle: () => { },

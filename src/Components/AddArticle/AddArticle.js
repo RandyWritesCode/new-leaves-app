@@ -23,20 +23,33 @@ export default function AddArticle(props) {
               )}>
                 <section className="form-section overview-section">
                   <label htmlFor="leaf-title">Leaf title</label>
-                  <input type="text" name="leaf-title" placeholder="Winnie the Pooh Day" required onChange={props.handleArticleTitleChange} />
+                  <input
+                    type="text"
+                    name="leaf-title"
+                    placeholder="Winnie the Pooh Day"
+                    required
+                    id='leaf_title'
+                  // onChange={(e) => props.handleArticleTitleChange(e)}
+                  />
                 </section>
 
                 <section className="form-section overview-section">
                   <label htmlFor="leaf-summary">Leaf summary</label>
-                  <textarea name="leaf-summary" rows="15" required onChange={props.handleArticleSummaryChange}></textarea>
+                  <textarea
+                    name="leaf-summary"
+                    rows="15"
+                    required
+                    id="leaf_summary"
+                  // onChange={(e) => props.handleArticleSummaryChange(e)}
+                  ></textarea>
                 </section>
 
-                <section className="form-section leaf-type-section" onChange={props.handleArticleTypeChange}>
+                {/* <section className="form-section leaf-type-section" >
                   <h2>Select Leaf Type</h2>
                   <Error>
                     <ArticleType articleType={props.state.articleType} />
                   </Error>
-                </section>
+                </section> */}
 
 
                 <section className="button-section">

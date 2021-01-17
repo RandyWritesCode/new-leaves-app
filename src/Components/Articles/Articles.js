@@ -13,48 +13,49 @@ class Article extends React.Component {
   //   super(props)
   // }
 
-  componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/articles`,
-      {
-        method: 'GET',
-        headers: {
-          'authorization': `bearer ${TokenService.getAuthToken()}`,
-        }
-      }
-    )
-      .then(res => {
-        if (!res.ok) {
-          return res.json.then(error => Promise.reject(error))
-        }
-        return res.json()
-      })
-      .then(articles => {
-        console.log('new component', articles)
-        this.handleRetrieveArticles(articles)
-      })
-      .catch(error => this.setState({ error }))
-  }
+  // componentDidMount() {
+  //   fetch(`${config.API_ENDPOINT}/articles`,
+  //     {
+  //       method: 'GET',
+  //       headers: {
+  //         'authorization': `bearer ${TokenService.getAuthToken()}`,
+  //       }
+  //     }
+  //   )
+  //     .then(res => {
+  //       console.log('res: ', res, 'res.ok: ', res.ok, 'res.json(): ', res.json())
+  //       // if (!res.ok) {
+  //       //   return res.json.then(error => Promise.reject(error))
+  //       // }
+  //       // return res.json()
+  //     })
+  //   // .then(articles => {
+  //   //   console.log('new component', articles)
+  //   //   this.handleRetrieveArticles(articles)
+  //   // })
+  //   // .catch(error => this.setState({ error }))
+  // }
 
-  handleDeleteArticle = (articleId, deleteNoteByContext) => {
-    fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
-      method: 'DELETE',
-      'authorization': `bearer ${TokenService.getAuthToken()}`,
-    })
-      .then(res => {
-        if (!res.ok) {
-          return res.json().then(error => {
-            throw error
-          })
-        }
-        return res
-      })
-      .then(() => {
-        deleteNoteByContext(articleId)
-      })
-      .catch(error => {
-        console.error(error)
-      })
-  }
+  // handleDeleteArticle = (articleId, deleteNoteByContext) => {
+  //   fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
+  //     method: 'DELETE',
+  //     'authorization': `bearer ${TokenService.getAuthToken()}`,
+  //   })
+  //     .then(res => {
+  //       if (!res.ok) {
+  //         return res.json().then(error => {
+  //           throw error
+  //         })
+  //       }
+  //       return res
+  //     })
+  //     .then(() => {
+  //       deleteNoteByContext(articleId)
+  //     })
+  //     .catch(error => {
+  //       console.error(error)
+  //     })
+  // }
 
   render() {
 

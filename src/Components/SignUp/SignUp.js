@@ -17,11 +17,11 @@ function SignUp(props) {
           </div>
           <div>
             <label htmlFor="username">Username:</label>
-            <input type="text" name='username' id='username' placeholder='NewLeavesUser1' required />
+            <input type="text" name='username' id='username-sign-up' placeholder='NewLeavesUser1' required />
           </div>
           <div>
             <label htmlFor="password">Password</label>
-            <input type="password" name='password' id='password' required />
+            <input type="password" name='password' id='password-sign-up' required />
           </div>
           <div>
             <label htmlFor="confirm-password">Confirm Password</label>
