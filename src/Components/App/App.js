@@ -63,10 +63,9 @@ class App extends React.Component {
       .then(res => {
         username.value = ''
         password.value = ''
-        TokenService.saveAuthToken(res.authToken,)
-        this.handleLoginSuccess()
-        console.log(res.userId)
+        TokenService.saveAuthToken(res.authToken)
         TokenService.saveUserId(res.userId)
+        this.handleLoginSuccess()
       })
       .catch(res => {
         this.setState({ error: res.error })

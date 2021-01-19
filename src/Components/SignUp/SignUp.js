@@ -10,6 +10,7 @@ function SignUp(props) {
         <header>
           <h3>Sign Up</h3>
         </header>
+        <p>Password should have at least one uppercase and one lowercase letter, a number and a special character (ie. !@#$) </p>
         <form className='signup-form' onSubmit={props.handleSignUpSubmit} >
           <div>
             <label htmlFor="fullname">Full name:</label>

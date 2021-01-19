@@ -1,6 +1,5 @@
 import React from 'react';
 import NewLeavesContext from '../../NewLeavesContext'
-// import DeleteButton from '../Buttons/DeleteButton'
 import config from '../../config'
 import TokenService from '../../services/token-services';
 
@@ -63,21 +62,25 @@ export default function ArticleDetails(props) {
           </h2>
           <p>{article.article_type}</p>
           <p>{article.summary}</p>
-          <button
-            onClick={() =>
-              handleDeleteArticle(article.id, context.deleteArticle)
-            }
-          >
-            Delete
-          </button>
+          { (article.author == TokenService.getUserId()) ?
 
-          <button
+            (<>
+
+              <button
+                onClick={() =>
+                  handleDeleteArticle(article.id, context.deleteArticle)
+                }
+              >
+                Delete
+</button> </>) : ''}
+
+          {/* <button
             onClick={() =>
               handleCommentArticle(article.id, context.commentArticle)
             }
           >
             Comment
-          </button>
+          </button> */}
 
         </div>
       )}

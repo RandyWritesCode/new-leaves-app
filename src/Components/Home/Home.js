@@ -31,12 +31,12 @@ export default function Home() {
           <p>Looking for new ways to celebrate?  Interested in a tradition or holiday, but not sure how to practice it?  Wanting to understand how others do things?  Scroll through categorized lists of traditions using our search tool.</p>
         </section>
 
-        <section>
+        {/* <section>
           <header>
             <h3>Want to communicate with others about traditions?</h3>
           </header>
           <p>Respond to other posts by using the comments feature.</p>
-        </section>
+        </section> */}
         <section>
           <header>
             <h1>How to Use New Leaves</h1>
@@ -44,10 +44,10 @@ export default function Home() {
           <h2>To access the features of New Leaves, you must be logged in.
           Use the demo user account below in order to access the site, without creating an account.
         <p>
-              Username: Account1
+              Username: Randy
           </p>
             <p>
-              Password: 123abc$
+              Password: 1Aa!2Bb@
           </p>
           </h2>
         </section>

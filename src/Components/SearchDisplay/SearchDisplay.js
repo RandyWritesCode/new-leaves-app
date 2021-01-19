@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Error from '../AppError/AppError';
+import { Link } from 'react-router-dom';
 
 
 export default function Display(props) {
@@ -10,18 +11,16 @@ export default function Display(props) {
 
       return (<section key={idx}>
         <header>
-          <h2>{article.title}</h2>
+          <h2><Link to={`/articles/${article.id}`}>{article.title} </Link></h2>
           <p>{article.article_type}</p>
         </header>
         <blockquote>{article.summary}</blockquote>
 
-        <button>Edit</button>
-        <button>Delete</button>
+
       </section>
       );
     })
   }
-
 
   return (
     <Error>

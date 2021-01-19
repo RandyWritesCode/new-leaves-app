@@ -6,38 +6,9 @@ import Error from '../AppError/AppError';
 import TokenService from '../../services/token-services';
 import { Link } from 'react-router-dom'
 import './Articles.css'
-import userEvent from '@testing-library/user-event';
 
 
 class Article extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
-
-  // componentDidMount() {
-  //   fetch(`${config.API_ENDPOINT}/articles`,
-  //     {
-  //       method: 'GET',
-  //       headers: {
-  //         'authorization': `bearer ${TokenService.getAuthToken()}`,
-  //       }
-  //     }
-  //   )
-  //     .then(res => {
-  //       console.log('res: ', res, 'res.ok: ', res.ok, 'res.json(): ', res.json())
-  //       // if (!res.ok) {
-  //       //   return res.json.then(error => Promise.reject(error))
-  //       // }
-  //       // return res.json()
-  //     })
-  //   // .then(articles => {
-  //   //   console.log('new component', articles)
-  //   //   this.handleRetrieveArticles(articles)
-  //   // })
-  //   // .catch(error => this.setState({ error }))
-  // }
-
-
 
   handleDeleteArticle = (articleId, deleteNoteByContext) => {
 
@@ -89,7 +60,8 @@ class Article extends React.Component {
 
                     { (article.author == TokenService.getUserId()) ?
 
-                      (<><button>Edit</button>
+                      (<>
+
                         <button
                           onClick={() =>
                             this.handleDeleteArticle(article.id, context.deleteArticle)
