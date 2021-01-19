@@ -6,6 +6,7 @@ import Error from '../AppError/AppError';
 import TokenService from '../../services/token-services';
 import { Link } from 'react-router-dom'
 import './Articles.css'
+import userEvent from '@testing-library/user-event';
 
 
 class Article extends React.Component {
@@ -36,7 +37,10 @@ class Article extends React.Component {
   //   // .catch(error => this.setState({ error }))
   // }
 
+
+
   handleDeleteArticle = (articleId, deleteNoteByContext) => {
+
     fetch(`${config.API_ENDPOINT}/articles/${articleId}`, {
       method: 'DELETE',
       headers: {
@@ -67,29 +71,35 @@ class Article extends React.Component {
           <header role="banner">
             <h1>Leaf Pile</h1>
           </header>
+
           {this.props.articles.map((article, idx) => {
 
             return (<NewLeavesContext.Consumer key={idx}>
-              {(context) => (
-                < section >
-                  <header>
-                    <Link to={`/articles/${article.id}`} >
-                      <h2 >{article.title}</h2>
-                    </Link>
-                    <p>{article.article_type}</p>
-                  </header>
-                  <blockquote>{article.summary}</blockquote>
+              {(context) => {
+                console.log(article, TokenService.getUserId())
+                return (
+                  < section >
+                    <header>
+                      <Link to={`/articles/${article.id}`} >
+                        <h2 >{article.title}</h2>
+                      </Link>
+                      <p>{article.article_type}</p>
+                    </header>
+                    <blockquote>{article.summary}</blockquote>
 
-                  <button>Edit</button>
-                  <button
-                    onClick={() =>
-                      this.handleDeleteArticle(article.id, context.deleteArticle)
-                    }
-                  >
-                    Delete
-                  </button>
-                </section>
-              )}
+                    { (article.author == TokenService.getUserId()) ?
+
+                      (<><button>Edit</button>
+                        <button
+                          onClick={() =>
+                            this.handleDeleteArticle(article.id, context.deleteArticle)
+                          }
+                        >
+                          Delete
+                  </button> </>) : ''}
+                  </section>
+                )
+              }}
             </NewLeavesContext.Consumer >
             )
           })}

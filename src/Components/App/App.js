@@ -28,12 +28,14 @@ class App extends React.Component {
       store: {
         articles: []
       },
-      article: {},
+      article: {}, //
       articleType: '',
       articleTitle: '',
       articleSummary: '',
+      author: '',
 
       error: null,
+
     }
   };
 
@@ -61,8 +63,10 @@ class App extends React.Component {
       .then(res => {
         username.value = ''
         password.value = ''
-        TokenService.saveAuthToken(res.authToken)
+        TokenService.saveAuthToken(res.authToken,)
         this.handleLoginSuccess()
+        console.log(res.userId)
+        TokenService.saveUserId(res.userId)
       })
       .catch(res => {
         this.setState({ error: res.error })
@@ -110,7 +114,7 @@ class App extends React.Component {
         return res.json()
       })
       .then(articles => {
-        console.log("articles from fetch2", articles);
+        console.log("articles from search", articles);
         let display = articles.filter(article => {
           let searchTerm = this.state.searchTerm.toLowerCase()
           let articleValue = article[this.state.searchCategory].toLowerCase()
@@ -154,9 +158,11 @@ class App extends React.Component {
     console.log(event.target)
     const articleTitle = event.target.leaf_title.value
     const articleSummary = event.target.leaf_summary.value
+    const author = TokenService.getUserId
     this.setState({
       articleTitle: articleTitle,
-      articleSummary: articleSummary
+      articleSummary: articleSummary,
+      author: author
     })
     event.preventDefault()
     // const { articleTitle, articleSummary, articleType } = this.state
@@ -169,7 +175,7 @@ class App extends React.Component {
         'Access-Control-Allow-Origin': '*',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ title: articleTitle, summary: articleSummary, article_type: '' }),
+      body: JSON.stringify({ title: articleTitle, summary: articleSummary, article_type: '', author: author() }),
     })
       .then(res => {
         if (!res.ok) {
@@ -254,6 +260,10 @@ class App extends React.Component {
     })
   }
 
+  commentArticle = (articleId) => {
+    console.log(articleId)
+  }
+
   addArticle = (articleToAdd) => {
     let newArticle = {
       id: articleToAdd.id,
@@ -271,20 +281,21 @@ class App extends React.Component {
     })
   }
 
-  handleRetrieveArticles = (articles) => {
-    console.log('app component', articles)
-    this.setState({
-      store: {
-        articles: articles
-      }
-    })
-  }
+  // handleRetrieveArticles = (articles) => {
+  //   console.log('app component', articles)
+  //   this.setState({
+  //     store: {
+  //       articles: articles
+  //     }
+  //   })
+  // }
 
 
   render() {
     const contextValue = {
       deleteArticle: this.deleteArticle,
       addArticle: this.addArticle,
+      commentArticle: this.commentArticle
     }
 
     return (
@@ -320,7 +331,7 @@ class App extends React.Component {
                   render={() => (
                     <Articles
                       articles={this.state.store.articles}
-                      handleRetrieveArticles={this.handleRetrieveArticles}
+                    // handleRetrieveArticles={this.handleRetrieveArticles}
                     />
                   )}
                 />
