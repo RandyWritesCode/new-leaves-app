@@ -47,7 +47,7 @@ class Article extends React.Component {
 
             return (<NewLeavesContext.Consumer key={idx}>
               {(context) => {
-                console.log(article, TokenService.getUserId())
+                // console.log(article, TokenService.getUserId())
                 return (
                   < section >
                     <header>

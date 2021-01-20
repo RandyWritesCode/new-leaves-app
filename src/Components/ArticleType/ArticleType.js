@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-export default function ArticleType(props) {
+function ArticleType(props) {
+  // console.log('ARticle type props: ', props)
   return (
     <>
       <input
@@ -10,7 +11,8 @@ export default function ArticleType(props) {
         id="none"
         value=""
         className="leaf-type-radio"
-        checked={props.articleType === ''} />
+        checked={props.articleType === ''}
+      />
       <label htmlFor="none">
         <span>None</span>
         <p className="leaf-type-explanation">To help other users find your post,
@@ -37,7 +39,7 @@ export default function ArticleType(props) {
         id="holiday"
         value="Holiday"
         className="leaf-type-radio"
-        checked={props.articleType === 'Holiday'}
+      // checked={props.articleType === 'Holiday'}
       />
       <label htmlFor="holiday">
         <span>Holiday</span>
@@ -51,7 +53,7 @@ export default function ArticleType(props) {
         id="daily-practice"
         value="Daily Practice"
         className="leaf-type-radio"
-        checked={props.articleType === 'Daily Practice'}
+      // checked={props.articleType === 'Daily Practice'}
       />
       <label htmlFor="daily-practice">
         <span>Daily Practice</span>
@@ -65,7 +67,7 @@ export default function ArticleType(props) {
         id="adaptation"
         value="Adaptation"
         className="leaf-type-radio"
-        checked={props.articleType === 'Adaptation'}
+      // checked={props.articleType === 'Adaptation'}
       />
       <label htmlFor="adaptation">
         <span>Adaptation</span>
@@ -79,7 +81,7 @@ export default function ArticleType(props) {
         id="clothing"
         value="Clothing"
         className="leaf-type-radio"
-        checked={props.articleType === 'Clothing'}
+      // checked={props.articleType === 'Clothing'}
       />
       <label htmlFor="clothing">
         <span>Clothing</span>
@@ -92,7 +94,7 @@ export default function ArticleType(props) {
         id="food"
         value="Food"
         className="leaf-type-radio"
-        checked={props.articleType === 'Food'}
+      // checked={props.articleType === 'Food'}
       />
       <label htmlFor="food">
         <span>Food</span>
@@ -101,3 +103,4 @@ export default function ArticleType(props) {
     </>
   );
 };
+export default ArticleType;

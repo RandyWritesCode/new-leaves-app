@@ -113,7 +113,7 @@ class App extends React.Component {
         return res.json()
       })
       .then(articles => {
-        console.log("articles from search", articles);
+        // console.log("articles from search", articles);
         let display = articles.filter(article => {
           let searchTerm = this.state.searchTerm.toLowerCase()
           let articleValue = article[this.state.searchCategory].toLowerCase()
@@ -154,9 +154,10 @@ class App extends React.Component {
   // };
 
   handleArticleSubmit = (event, addArticleByContext) => {
-    console.log(event.target)
+    console.log(this.state.article_type) //undefined
     const articleTitle = event.target.leaf_title.value
     const articleSummary = event.target.leaf_summary.value
+    const articleType = this.state.articleType
     const author = TokenService.getUserId
     this.setState({
       articleTitle: articleTitle,
@@ -174,7 +175,7 @@ class App extends React.Component {
         'Access-Control-Allow-Origin': '*',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
-      body: JSON.stringify({ title: articleTitle, summary: articleSummary, article_type: '', author: author() }),
+      body: JSON.stringify({ title: articleTitle, summary: articleSummary, article_type: articleType, author: author() }),
     })
       .then(res => {
         if (!res.ok) {
@@ -203,7 +204,7 @@ class App extends React.Component {
     event.preventDefault()
 
     const { fullname, username, password } = event.target
-    console.log(fullname.value, username.value)
+    // console.log(fullname.value, username.value)
 
     this.setState({ error: null })
     AuthApiService.postUser({
@@ -259,9 +260,9 @@ class App extends React.Component {
     })
   }
 
-  commentArticle = (articleId) => {
-    console.log(articleId)
-  }
+  // commentArticle = (articleId) => {
+  //   console.log(articleId)
+  // }
 
   addArticle = (articleToAdd) => {
     let newArticle = {
@@ -289,6 +290,13 @@ class App extends React.Component {
   //   })
   // }
 
+  onValueChange = (event) => {
+    console.log(event)
+    this.setState({
+      articleType: event.target.value
+    })
+    console.log(this.state.articleType)
+  }
 
   render() {
     const contextValue = {
@@ -297,6 +305,7 @@ class App extends React.Component {
       commentArticle: this.commentArticle
     }
 
+    // console.log(this.state.articleType)
     return (
       <NewLeavesContext.Provider value={contextValue}>
 
@@ -352,6 +361,7 @@ class App extends React.Component {
                       state={this.state}
                       handleArticleTitleChange={this.handleArticleTitleChange}
                       handleArticleSummaryChange={this.handleArticleSummaryChange}
+                      onValueChange={this.onValueChange}
                     />
                   )}
                 />
