@@ -154,15 +154,16 @@ class App extends React.Component {
   // };
 
   handleArticleSubmit = (event, addArticleByContext) => {
-    console.log(this.state.article_type) //undefined
+    console.log(event.target.leaf_type.value) //undefined
     const articleTitle = event.target.leaf_title.value
     const articleSummary = event.target.leaf_summary.value
-    const articleType = this.state.articleType
+    const articleType = event.target.leaf_type.value
     const author = TokenService.getUserId
     this.setState({
       articleTitle: articleTitle,
       articleSummary: articleSummary,
-      author: author
+      author: author,
+      articleType: articleType
     })
     event.preventDefault()
     // const { articleTitle, articleSummary, articleType } = this.state
@@ -265,6 +266,7 @@ class App extends React.Component {
   // }
 
   addArticle = (articleToAdd) => {
+    console.log(articleToAdd)
     let newArticle = {
       id: articleToAdd.id,
       title: articleToAdd.title,

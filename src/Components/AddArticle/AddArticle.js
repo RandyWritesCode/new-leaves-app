@@ -52,12 +52,10 @@ export default function AddArticle(props) {
                   </Error> */}
                   <input
                     type="radio"
-                    name="leaf-type"
+                    name="leaf_type"
                     id="none"
                     value=""
                     className="leaf-type-radio"
-                    checked={props.state.articleType === ''}
-                    onChange={(e) => props.onValueChange(e)}
                   />
                   <label htmlFor="none">
                     <span>None</span>
@@ -67,12 +65,10 @@ export default function AddArticle(props) {
 
                   <input
                     type="radio"
-                    name="leaf-type"
+                    name="leaf_type"
                     id="family"
                     value="Family"
                     className="leaf-type-radio"
-                    checked={props.state.articleType === 'Family'}
-                    onChange={(e) => props.onValueChange(e)}
 
                   />
                   <label htmlFor="family">
@@ -81,13 +77,12 @@ export default function AddArticle(props) {
               or unique to your household.</p>
                   </label>
 
-                  {/* <input
+                  <input
                     type="radio"
-                    name="leaf-type"
+                    name="leaf_type"
                     id="holiday"
                     value="Holiday"
                     className="leaf-type-radio"
-                    checked={props.state.articleType === 'Holiday'}
                   />
                   <label htmlFor="holiday">
                     <span>Holiday</span>
@@ -97,11 +92,10 @@ export default function AddArticle(props) {
 
                   <input
                     type="radio"
-                    name="leaf-type"
+                    name="leaf_type"
                     id="daily-practice"
                     value="Daily Practice"
                     className="leaf-type-radio"
-                    checked={props.state.articleType === 'Daily Practice'}
                   />
                   <label htmlFor="daily-practice">
                     <span>Daily Practice</span>
@@ -111,11 +105,10 @@ export default function AddArticle(props) {
 
                   <input
                     type="radio"
-                    name="leaf-type"
+                    name="leaf_type"
                     id="adaptation"
                     value="Adaptation"
                     className="leaf-type-radio"
-                    checked={props.state.articleType === 'Adaptation'}
                   />
                   <label htmlFor="adaptation">
                     <span>Adaptation</span>
@@ -125,11 +118,10 @@ export default function AddArticle(props) {
 
                   <input
                     type="radio"
-                    name="leaf-type"
+                    name="leaf_type"
                     id="clothing"
                     value="Clothing"
                     className="leaf-type-radio"
-                    checked={props.state.articleType === 'Clothing'}
                   />
                   <label htmlFor="clothing">
                     <span>Clothing</span>
@@ -138,18 +130,16 @@ export default function AddArticle(props) {
 
                   <input
                     type="radio"
-                    name="leaf-type"
+                    name="leaf_type"
                     id="food"
                     value="Food"
                     className="leaf-type-radio"
-                    checked={props.state.articleType === 'Food'}
                   />
                   <label htmlFor="food">
                     <span>Food</span>
                     <p className="leaf-type-explanation">Recipes and traditions related to food.</p>
-                  </label> */}
+                  </label>
                 </section>
-
 
                 <section className="button-section">
                   <button type="submit">Submit</button>
