@@ -9,53 +9,41 @@ export default function Home() {
   return (
     <Error>
 
-      <section>
+      <div className='pageContainer'>
         <section>
           <header>
-            <h1>New Leaves</h1>
+            <h2>New Leaves</h2>
           </header>
-          <h2>As time passes and seasons in our lives change, we sometimes let go of old traditions and gain new ones. This app provides a place for users to grow new leaves, or learn new traditions through an exchange of ideas and community discourse.</h2>
+          <h3>learn new traditions 
+            </h3>
         </section>
 
         <section>
           <header>
             <h3>Traditions worth sharing!</h3>
           </header>
-          <p>Have a tradition worth sharing?  Article it so that others can start practicing it.</p>
+          <p>Have a tradition worth sharing?  Post it using New Leaf so that others can start practicing it.</p>
         </section>
 
         <section>
           <header>
             <h3>Find worth while traditions</h3>
           </header>
-          <p>Looking for new ways to celebrate?  Interested in a tradition or holiday, but not sure how to practice it?  Wanting to understand how others do things?  Scroll through categorized lists of traditions using our search tool.</p>
+          <p>Looking for new ways to celebrate?  Interested in a tradition or holiday, but not sure how to practice it?  Wanting to understand how others do things?  Scroll through categorized lists of traditions using search.</p>
         </section>
 
-        {/* <section>
-          <header>
-            <h3>Want to communicate with others about traditions?</h3>
-          </header>
-          <p>Respond to other posts by using the comments feature.</p>
-        </section> */}
         <section>
           <header>
-            <h1>How to Use New Leaves</h1>
+            <h3>How to Use New Leaves</h3>
           </header>
-          <h2>To access the features of New Leaves, you must be logged in.
-          Use the demo user account below in order to access the site, without creating an account.
-        <p>
-              Username: Randy
+          <p>To access the features of New Leaves, you must be logged in.
+          Create a new account or use the demo account below.
+    
           </p>
-            <p>
-              Password: 1Aa!2Bb@
-          </p>
-          </h2>
         </section>
         <Login />
-
         <SignUp />
-
-      </section >
+      </div >
     </Error>
   );
 };

@@ -1,0 +1,13 @@
+label {
+  display: block;
+  margin: 1vw 1vw;
+}
+
+input, 
+select{
+  display: block;
+  padding: .5vw;
+  margin: 1vw;
+  font-family: 'Open Sans', sans-serif;
+}
+

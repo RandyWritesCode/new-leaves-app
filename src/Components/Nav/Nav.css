@@ -4,16 +4,14 @@
 
 nav{
   padding: 1% 0;
-  background-color: black;
+  background-color: rgba(38, 57, 5);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 10;
-}
-
-header {
-  color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 li {
@@ -22,10 +20,14 @@ li {
   list-style: none;
 }
 
-li a:hover {
-  background-color: grey;
+a {
+  color: white;
+  font-size: 25px;
+  font-family: 'Imbue', serif;
 }
 
-a {
-  color: white
+.logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 50px;
+  color: white;
 }

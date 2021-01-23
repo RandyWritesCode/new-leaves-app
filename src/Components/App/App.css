@@ -1,17 +1,23 @@
 main {
-  background-color: lightgrey;
-  font-family: "Open Sans",
-  sans-serif;
   font-size: 20px;
   text-align: center;
   line-height: 1.5;
-  color:grey;
-  padding-top: 200px;  
-  background-color: #bbb;
+  color:rgb(250, 245, 240);
+  padding-top: 100px;  
+  background-image: url("../../images/trees-md.jpg");
+  background-position: center;
+  background-attachment: fixed;
+
 }
 
-@media (max-width: 320px) {
-  * {
-    font-size: 4vw;
-  }
+header {
+  color: white;
+}
+
+
+/* media queries */
+@media (min-width: 361px) {
+  /* h2 {
+    font-size: 100px;
+  } */
 }

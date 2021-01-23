@@ -1,0 +1,45 @@
+.pageContainer {
+  padding-top: 200px;
+}
+
+h2 {
+  font-size: 35px;
+  padding: 0px 20px;
+  margin: 15px 20px 0px 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h3 {
+  font-size: 20px;
+  padding: 0px 20px;
+  margin: 5px 20px 10px 20px;
+  font-style: italic;
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+h4 {
+  font-size: 27px;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+h5 {
+  font-family: 'Imbue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+
+}
+blockquote {
+  font-size: 25px;
+  padding: 0;
+  margin: 0 5px 5px 5px;
+  font-family: 'Imbue', sans-serif;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+}
+
+a:hover {
+background-color: grey}

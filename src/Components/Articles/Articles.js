@@ -38,10 +38,14 @@ class Article extends React.Component {
 
     return (
       <Error>
-        <div>
-          <header role="banner">
-            <h1>Leaf Pile</h1>
-          </header>
+        <div className="pageContainer" >
+          <section>
+            <header role="banner">
+              <h2>Leaf Pile</h2>
+              <h3>View shared traditions here.</h3>
+            </header>
+
+          </section>
 
           {this.props.articles.map((article, idx) => {
 
@@ -52,9 +56,9 @@ class Article extends React.Component {
                   < section >
                     <header>
                       <Link to={`/articles/${article.id}`} >
-                        <h2 >{article.title}</h2>
+                        <h4 >{article.title}</h4>
                       </Link>
-                      <p>{article.article_type}</p>
+                      <h5>{article.article_type}</h5>
                     </header>
                     <blockquote>{article.summary}</blockquote>
 

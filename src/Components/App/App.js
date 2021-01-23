@@ -16,6 +16,7 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import AuthApiService from '../../services/auth-api-service';
 import './App.css'
+import Footer from '../Footer';
 
 class App extends React.Component {
   constructor(props) {
@@ -131,27 +132,6 @@ class App extends React.Component {
       .catch(error => this.setState({ error }))
   }
 
-  // handleArticleTitleChange = event => {
-  //   // console.log(event.target.value)
-  //   let articleTitle = event.target.value
-  //   this.setState({
-  //     articleTitle: articleTitle
-  //   })
-  // };
-
-  // handleArticleSummaryChange = event => {
-  //   let articleSummary = event.target.value
-  //   this.setState({
-  //     articleSummary: articleSummary
-  //   })
-  // };
-
-  // handleArticleTypeChange = event => {
-  //   let articleType = event.target.value
-  //   this.setState({
-  //     articleType: articleType
-  //   })
-  // };
 
   handleArticleSubmit = (event, addArticleByContext) => {
     console.log(event.target.leaf_type.value) //undefined
@@ -261,9 +241,7 @@ class App extends React.Component {
     })
   }
 
-  // commentArticle = (articleId) => {
-  //   console.log(articleId)
-  // }
+
 
   addArticle = (articleToAdd) => {
     console.log(articleToAdd)
@@ -283,14 +261,7 @@ class App extends React.Component {
     })
   }
 
-  // handleRetrieveArticles = (articles) => {
-  //   console.log('app component', articles)
-  //   this.setState({
-  //     store: {
-  //       articles: articles
-  //     }
-  //   })
-  // }
+
 
   onValueChange = (event) => {
     console.log(event)
@@ -314,6 +285,7 @@ class App extends React.Component {
         <div className="App">
           <Nav />
           <main>
+
             <Error>
               <Switch>
                 <Route
@@ -381,7 +353,10 @@ class App extends React.Component {
                 />
 
               </Switch>
+
+              <Footer />
             </ Error >
+
           </main>
         </div>
 

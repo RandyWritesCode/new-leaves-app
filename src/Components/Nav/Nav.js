@@ -45,12 +45,15 @@ export default class Nav extends React.Component {
       <Error>
 
         <nav>
-          <header>
-            <h3> <a href="/">New Leaves 🍃</a></h3>
-          </header>
-          {TokenService.hasAuthToken()
-            ? this.renderLogoutLink()
-            : this.renderLoginLink()}
+          <div>
+            <a href="/"><h1 className='logo'> New Leaves 🍃</h1></a>
+          </div>
+          <div>
+
+            {TokenService.hasAuthToken()
+              ? this.renderLogoutLink()
+              : this.renderLoginLink()}
+          </div>
 
         </nav>
       </Error >

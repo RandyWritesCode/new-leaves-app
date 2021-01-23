@@ -11,11 +11,12 @@ export default function Display(props) {
 
       return (<section key={idx}>
         <header>
-          <h2><Link to={`/articles/${article.id}`}>{article.title} </Link></h2>
-          <p>{article.article_type}</p>
+          <Link to={`/articles/${article.id}`}>
+            <h4>{article.title}</h4>
+          </Link>
+          <h5>{article.article_type}</h5>
         </header>
         <blockquote>{article.summary}</blockquote>
-
 
       </section>
       );
@@ -25,9 +26,9 @@ export default function Display(props) {
   return (
     <Error>
 
-      <div>
+      <article>
         {article}
-      </div>
+      </article>
     </Error>
   );
 };

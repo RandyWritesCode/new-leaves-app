@@ -1,15 +1,13 @@
 import React from 'react';
 import Error from '../AppError/AppError';
-// import AuthApiService from '../../services/auth-api-service';
-// import TokenService from '../../services/token-services';
-
+import './Login.css'
 export default function Login(props) {
   return (
     <Error>
 
       <section>
         <header>
-          <h3>Log in </h3>
+          <h2>Log in </h2>
 
         </header>
         <p>Demo Account:</p>
