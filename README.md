@@ -9,6 +9,8 @@ As time passes and seasons in our lives change, we sometimes let go of old tradi
 - HTML 
 - JavaScript ES6
 
+![Screen Shot 2021-01-24 at 9 56 41 AM](https://user-images.githubusercontent.com/58892815/105634242-155db700-5e2b-11eb-9615-155980c5f9a1.png)
+
 ## Features: ##
 - Scroll through a feed of user posts
 - Search for posts by title, summary or category
