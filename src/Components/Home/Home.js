@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css';
+import { Link } from 'react-router-dom'
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
 import Error from '../AppError/AppError';
@@ -14,7 +15,7 @@ export default function Home() {
           <header>
             <h2>New Leaves</h2>
           </header>
-          <h3>learn new traditions 
+          <h3>learn new traditions
             </h3>
         </section>
 
@@ -37,8 +38,8 @@ export default function Home() {
             <h3>How to Use New Leaves</h3>
           </header>
           <p>To access the features of New Leaves, you must be logged in.
-          Create a new account or use the demo account below.
-    
+          If you haven't already,  create a <Link to="/signup">new account</Link> or <Link to="/login">log in</Link> using the demo account.
+
           </p>
         </section>
       </div >
