@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <section>
+    <section className='footer'>
       <p>
         Don't leaf me hanging
         </p>

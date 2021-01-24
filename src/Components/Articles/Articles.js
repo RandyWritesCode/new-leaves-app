@@ -51,7 +51,6 @@ class Article extends React.Component {
 
             return (<NewLeavesContext.Consumer key={idx}>
               {(context) => {
-                // console.log(article, TokenService.getUserId())
                 return (
                   < section >
                     <header>
@@ -62,17 +61,14 @@ class Article extends React.Component {
                     </header>
                     <blockquote>{article.summary}</blockquote>
 
-                    { (article.author == TokenService.getUserId()) ?
-
-                      (<>
-
-                        <button
-                          onClick={() =>
-                            this.handleDeleteArticle(article.id, context.deleteArticle)
-                          }
-                        >
-                          Delete
-                  </button> </>) : ''}
+                    { (article.author == TokenService.getUserId())
+                      ? (<>
+                          <button
+                            onClick={() => this.handleDeleteArticle(article.id, context.deleteArticle)}>
+                            Delete
+                          </button>
+                        </>)
+                      : '' }
                   </section>
                 )
               }}

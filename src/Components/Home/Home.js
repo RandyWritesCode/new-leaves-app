@@ -1,8 +1,6 @@
 import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom'
-import Login from '../Login/Login';
-import SignUp from '../SignUp/SignUp';
 import Error from '../AppError/AppError';
 
 

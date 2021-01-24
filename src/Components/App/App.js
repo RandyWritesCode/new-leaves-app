@@ -16,7 +16,7 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import AuthApiService from '../../services/auth-api-service';
 import './App.css'
-import Footer from '../Footer';
+import Footer from '../Footer/Footer';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class App extends React.Component {
       store: {
         articles: []
       },
-      article: {}, //
+      article: {}, 
       articleType: '',
       articleTitle: '',
       articleSummary: '',
@@ -114,7 +114,6 @@ class App extends React.Component {
         return res.json()
       })
       .then(articles => {
-        // console.log("articles from search", articles);
         let display = articles.filter(article => {
           let searchTerm = this.state.searchTerm.toLowerCase()
           let articleValue = article[this.state.searchCategory].toLowerCase()
@@ -134,7 +133,6 @@ class App extends React.Component {
 
 
   handleArticleSubmit = (event, addArticleByContext) => {
-    console.log(event.target.leaf_type.value) //undefined
     const articleTitle = event.target.leaf_title.value
     const articleSummary = event.target.leaf_summary.value
     const articleType = event.target.leaf_type.value
@@ -146,7 +144,6 @@ class App extends React.Component {
       articleType: articleType
     })
     event.preventDefault()
-    // const { articleTitle, articleSummary, articleType } = this.state
 
     fetch(`${config.API_ENDPOINT}/articles`, {
       'method': 'POST',
@@ -185,7 +182,6 @@ class App extends React.Component {
     event.preventDefault()
 
     const { fullname, username, password } = event.target
-    // console.log(fullname.value, username.value)
 
     this.setState({ error: null })
     AuthApiService.postUser({
@@ -220,7 +216,6 @@ class App extends React.Component {
         return res.json()
       })
       .then(articles => {
-        // console.log("articles from fetch", articles);
         this.setState({
           store: {
             articles: articles
@@ -229,7 +224,7 @@ class App extends React.Component {
       })
       .catch(error => this.setState({ error }))
   }
-  //handler to retireve data 
+
   deleteArticle = (articleId) => {
     const newArticles = this.state.store.articles.filter(article =>
       article.id !== articleId
@@ -241,10 +236,7 @@ class App extends React.Component {
     })
   }
 
-
-
   addArticle = (articleToAdd) => {
-    console.log(articleToAdd)
     let newArticle = {
       id: articleToAdd.id,
       title: articleToAdd.title,
@@ -262,15 +254,6 @@ class App extends React.Component {
   }
 
 
-
-  onValueChange = (event) => {
-    console.log(event)
-    this.setState({
-      articleType: event.target.value
-    })
-    console.log(this.state.articleType)
-  }
-
   render() {
     const contextValue = {
       deleteArticle: this.deleteArticle,
@@ -278,14 +261,15 @@ class App extends React.Component {
       commentArticle: this.commentArticle
     }
 
-    // console.log(this.state.articleType)
     return (
       <NewLeavesContext.Provider value={contextValue}>
 
         <div className="App">
           <Nav />
           <main>
+            <>
 
+            </>
             <Error>
               <Switch>
                 <Route
@@ -313,7 +297,6 @@ class App extends React.Component {
                   render={() => (
                     <Articles
                       articles={this.state.store.articles}
-                    // handleRetrieveArticles={this.handleRetrieveArticles}
                     />
                   )}
                 />
@@ -339,7 +322,7 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <PrivateRoute
+                <Route
                   path={'/search'}
                   render={() => (
                     <Search
@@ -356,7 +339,6 @@ class App extends React.Component {
 
               <Footer />
             </ Error >
-
           </main>
         </div>
 
