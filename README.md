@@ -4,8 +4,8 @@ As time passes and seasons in our lives change, we sometimes let go of old tradi
 ## Features: ##
 - Scroll through a feed of user posts
 - Search for posts by title, summary or category
-- Post your own traditions using the New Leaf feature
-- Sign up and login for full access to features (coming soon)
+- Post your own traditions using the 'New Leaf' feature
+- Sign up and login for full access to features
 
 
 ## Available Scripts ##
