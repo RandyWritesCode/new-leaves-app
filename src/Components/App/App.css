@@ -3,7 +3,7 @@ main {
   text-align: center;
   line-height: 1.5;
   color:rgb(250, 245, 240);
-  padding-top: 100px;  
+  /* padding-top: 100px;   */
   background-image: url("../../images/trees-md.jpg");
   background-position: center;
   background-attachment: fixed;
@@ -14,10 +14,50 @@ header {
   color: white;
 }
 
+section {
+  margin-bottom: 1vw;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+section:nth-child(1) {
+  margin-top: 280px;
+
+}
+
+.pageContainer {
+  padding-top: 20px;
+}
+
+input {
+  padding: 1vw;
+}
+
+::placeholder {
+  font-family: 'Imbue', sans-serif;
+  font-size: 4vw;
+}
+
 
 /* media queries */
-@media (min-width: 361px) {
-  /* h2 {
-    font-size: 100px;
-  } */
+@media (min-width: 640px) {
+::placeholder {
+  font-size: 3vw;
 }
+}
+
+@media (min-width: 1366px) {
+  ::placeholder {
+    font-size: 2vw;
+  }
+
+  main {
+    background-image: url("../../images/trees-lg.jpg");
+
+  }
+
+  section {
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+  }

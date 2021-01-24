@@ -41,8 +41,6 @@ export default function Home() {
     
           </p>
         </section>
-        <Login />
-        <SignUp />
       </div >
     </Error>
   );

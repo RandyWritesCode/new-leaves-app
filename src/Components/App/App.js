@@ -339,7 +339,7 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <Route
+                <PrivateRoute
                   path={'/search'}
                   render={() => (
                     <Search
