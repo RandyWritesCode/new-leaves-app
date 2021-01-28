@@ -20,9 +20,9 @@ li {
   list-style: none;
 }
 
-a {
+a, p {
   color: white;
-  font-size: 25px;
+  font-size: 30px;
   font-family: 'Imbue', serif;
 }
 

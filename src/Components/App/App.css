@@ -39,12 +39,22 @@ input {
 }
 
 
+p {
+  /* font-size: 6.5vw; */
+  letter-spacing: .3vw;
+}
+
 /* media queries */
 @media (min-width: 640px) {
 ::placeholder {
   font-size: 3vw;
 }
+
+/* p {
+  font-size: 4.5vw;
+} */
 }
+
 
 @media (min-width: 1366px) {
   ::placeholder {
@@ -55,7 +65,9 @@ input {
     background-image: url("../../images/trees-lg.jpg");
 
   }
-
+/* p {
+  font-size: 2vw;
+} */
   section {
     margin-right: 10%;
     margin-left: 10%;

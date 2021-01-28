@@ -11,16 +11,21 @@ export default function Home() {
       <div className='pageContainer'>
         <section>
           <header>
-            <h2>New Leaves</h2>
+            <h2>Why use New Leaves?</h2>
+            <h3>
+              As time passes and seasons in our lives change,
+              we sometimes let go of old traditions and gain new ones.
+              New Leaves provides a place for users to learn new traditions
+              and cherish the ones we hold dear.
+          </h3>
           </header>
-          <h3>learn new traditions
-            </h3>
         </section>
 
         <section>
           <header>
             <h3>Traditions worth sharing!</h3>
           </header>
+
           <p>Have a tradition worth sharing?  Post it using New Leaf so that others can start practicing it.</p>
         </section>
 
@@ -41,7 +46,7 @@ export default function Home() {
           </p>
         </section>
       </div >
-    </Error>
+    </Error >
   );
 };
 

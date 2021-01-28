@@ -20,7 +20,13 @@ export default class Search extends React.Component {
             <form className='signup-form' onSubmit={this.props.handleSearchSubmit} >
               <div>
                 <label htmlFor="search-term">Search Term: </label>
-                <input onChange={this.props.handleSearchTermChange} placeholder='Potato Chip Day' type="text" name='search-term' id='search-term' />
+                <input
+                  onChange={this.props.handleSearchTermChange}
+                  placeholder='Potato Chip Day'
+                  type="text"
+                  name='search-term'
+                  id='search-term'
+                />
               </div>
               <div className="form-section leaf-type-section">
                 <label htmlFor='search-type'>Search by title, summary content or category: </label>

@@ -29,7 +29,7 @@ class App extends React.Component {
       store: {
         articles: []
       },
-      article: {}, 
+      article: {},
       articleType: '',
       articleTitle: '',
       articleSummary: '',
@@ -117,6 +117,7 @@ class App extends React.Component {
         let display = articles.filter(article => {
           let searchTerm = this.state.searchTerm.toLowerCase()
           let articleValue = article[this.state.searchCategory].toLowerCase()
+          console.log(articleValue)
           return articleValue.includes(searchTerm)
         })
         this.setState({
