@@ -22,7 +22,7 @@ export default class Search extends React.Component {
                 <label htmlFor="search-term">Search Term: </label>
                 <input
                   onChange={this.props.handleSearchTermChange}
-                  placeholder='Potato Chip Day'
+                  // placeholder='Potato Chip Day'
                   type="text"
                   name='search-term'
                   id='search-term'
